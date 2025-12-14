@@ -64,6 +64,9 @@ export class EventoFormComponent implements OnInit {
       organizadorNome: ['', Validators.required],
       organizadorEmail: ['', [Validators.required, Validators.email]],
       organizadorContato: ['', Validators.required],
+      habilitarPix: [false],
+      habilitarCartao: [false],
+      qtdParcelas: [1],
       bannerImagem: ['', Validators.required],
       status: ['Criado', Validators.required],
       local: this.fb.group({
@@ -290,6 +293,7 @@ export class EventoFormComponent implements OnInit {
           console.error('Evento não encontrado!');
           return;
         }
+        console.log(evento)
         
         this.eventoForm.patchValue({
           id: evento.id,
@@ -308,7 +312,11 @@ export class EventoFormComponent implements OnInit {
           
           exibirPregadores: evento.exibirPregadores,
           exibirProgramacao: evento.exibirProgramacao,
-          exibirInformacoesAdicionais: evento.exibirInformacoesAdicionais
+          exibirInformacoesAdicionais: evento.exibirInformacoesAdicionais,
+          habilitarPix: evento.habilitarPix,
+          habilitarCartao: evento.habilitarCartaoCredito,
+          qtdParcelas: evento.qtdParcelas,
+
         });
         
         // this.getSobre().clear();

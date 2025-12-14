@@ -43,7 +43,7 @@ export class InscricaoDialogComponent implements OnInit{
   pixCopiaECola: string = '';
   copiado = false;
   codigoInscricao: string = '';
-  
+  linkPgtoCartao: string = '';
   
   constructor(private fb: FormBuilder,
     private service: EventoService,
@@ -157,7 +157,7 @@ export class InscricaoDialogComponent implements OnInit{
     }
     // Aqui você envia a forma de pagamento para o backend
     this.service.inscricao(this.inscricaoForm.value).subscribe(resp => {
-      
+      debugger
       if (resp.tipoPagamento === 'pix'){
         this.toastr.success('A inscrição será efetivada após o pagamento!');
 
@@ -168,8 +168,9 @@ export class InscricaoDialogComponent implements OnInit{
       }
 
       if (resp.tipoPagamento === 'cartao'){
-        this.toastr.success('Inscrição realizada com sucessso!');
+        this.toastr.success('Link para pagamento com cartão de crédito foi gerado com sucesso.!');
         this.mostrarQRCode = false
+        this.linkPgtoCartao = resp.linkPgtoCartao;
       }
  
       this.codigoInscricao = resp.codigoInscricao;
@@ -239,6 +240,13 @@ export class InscricaoDialogComponent implements OnInit{
       }
       
     });
+  }
+
+  irParaPagamento(event: any){
+    event.preventDefault();
+    if (this.linkPgtoCartao) {
+      window.open(this.linkPgtoCartao, '_blank');
+    }
   }
   
   selecionarForma(forma: 'pix' | 'cartao') {
