@@ -56,7 +56,7 @@ export class InscricaoDialogComponent implements OnInit{
       eventoId: this.eventoId,
       cpf: ['', Validators.required],
       nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       telefone: ['', Validators.required],
       decanatoId: [''],
       grupoOracaoId: [''],
