@@ -11,6 +11,8 @@ import { SectionFormComponent } from './section-form/section-form.component';
 import { ModalReenvioComponent } from './modal-reenvio/modal-reenvio.component';
 import { LoginComponent } from './login/login.component';
 import { AuthLayoutComponent } from './auth/auth-layout.component';
+import { UsuariosFormComponent } from './usuarios/usuarios-form/usuario-form.component';
+import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AuthLayoutComponent } from './auth/auth-layout.component';
     SectionFormComponent,
     ModalReenvioComponent,
     LoginComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    UsuariosFormComponent,
+    UsuariosListComponent
   ],
   imports: [
     CommonModule,

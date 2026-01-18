@@ -6,6 +6,8 @@ import { EventoFormComponent } from './evento-form/evento-form.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthLayoutComponent } from './auth/auth-layout.component';
+import { UsuariosFormComponent } from './usuarios/usuarios-form/usuario-form.component';
+import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,9 @@ const routes: Routes = [
       { path: 'eventos', component: EventoListComponent, canActivate: [AuthGuard] },
       { path: 'eventos/novo', component: EventoFormComponent, canActivate: [AuthGuard] },
       { path: 'eventos/editar/:id', component: EventoFormComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios', component: UsuariosListComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios/novo', component: UsuariosFormComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios/editar/:id', component: UsuariosFormComponent, canActivate: [AuthGuard] },
       { path: '', redirectTo: 'eventos', pathMatch: 'full' }
     ]
   },

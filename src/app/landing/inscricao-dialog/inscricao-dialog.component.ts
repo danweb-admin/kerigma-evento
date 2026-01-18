@@ -46,6 +46,14 @@ export class InscricaoDialogComponent implements OnInit{
   habilitarPix: boolean = false;
   habilitarCartao: boolean = false;
   qtdParcelas: number = 1;
+  // Tempo total do Pix (em segundos)
+  tempoTotalPix = 15 * 60; // 15 minutos
+  tempoRestante = this.tempoTotalPix;
+  
+  pixExpirado = false;
+  private timerPix: any;
+  statusPagamento: 'PENDENTE' | 'PAGO' | 'EXPIRADO' = 'PENDENTE';
+  private pollingPix: any;
   
   constructor(private fb: FormBuilder,
     private service: EventoService,
@@ -69,14 +77,14 @@ export class InscricaoDialogComponent implements OnInit{
       validade: [],
       cvv: [],
       quantidadeParcelas: [0]
-
+      
     });
   }
   ngOnInit(): void {
     this.carregarDecanato();
     this.carregarGrupoOracoes();
     this.getEventoById();
-
+    
     
     this.inscricaoForm.patchValue({ eventoId: this.eventoId });
     
@@ -110,6 +118,32 @@ export class InscricaoDialogComponent implements OnInit{
     this.buscaLoteInscricao();
     
   }
+  
+  formatarTempo(): string {
+    const min = Math.floor(this.tempoRestante / 60);
+    const sec = this.tempoRestante % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+  
+  iniciarVerificacaoPagamento() {
+    this.pollingPix = setInterval(() => {
+      this.service.verificarStatus(this.codigoInscricao)
+      .subscribe(
+        response => {
+        if (response.status === 'PAGO') {
+          clearInterval(this.pollingPix);
+          clearInterval(this.timerPix);
+          
+          this.statusPagamento = 'PAGO';
+        }
+      },
+        (error: any) =>{
+            console.log(error);
+            
+        });
+    }, 5000); // a cada 5 segundos
+  }
+  
   
   buscaLoteInscricao(){
     this.service.getLoteInscricao(this.eventoId).subscribe({
@@ -166,19 +200,21 @@ export class InscricaoDialogComponent implements OnInit{
       
       if (resp.tipoPagamento === 'pix'){
         this.toastr.success('A inscrição será efetivada após o pagamento, verifique seu email!');
-
+        
         this.qrCode = true;
         this.qrCodeLink = `data:image/png;base64,${resp.linkQrCodeBase64}`;
         this.pixCopiaECola = resp.qrCodeCopiaCola;
         this.mostrarCartao = false;
+        this.iniciarTimerPix();
+        this.iniciarVerificacaoPagamento();
       }
-
+      
       if (resp.tipoPagamento === 'cartao'){
         this.toastr.success('Link para pagamento com cartão de crédito foi gerado com sucesso.!');
         this.mostrarQRCode = false
         this.linkPgtoCartao = resp.linkPgtoCartao;
       }
- 
+      
       this.codigoInscricao = resp.codigoInscricao;
       this.bloquearConfirmar = true;
     },(error: any) =>{
@@ -186,6 +222,26 @@ export class InscricaoDialogComponent implements OnInit{
     });
     
   }
+  
+  iniciarTimerPix() {
+    // Evita múltiplos timers
+    if (this.timerPix) {
+      clearInterval(this.timerPix);
+    }
+    
+    this.pixExpirado = false;
+    this.tempoRestante = this.tempoTotalPix;
+    
+    this.timerPix = setInterval(() => {
+      this.tempoRestante--;
+      
+      if (this.tempoRestante <= 0) {
+        clearInterval(this.timerPix);
+        this.pixExpirado = true;
+      }
+    }, 1000);
+  }
+  
   
   copiarCodigoPix(event: any) {
     event.preventDefault();
@@ -201,7 +257,7 @@ export class InscricaoDialogComponent implements OnInit{
   voltar(){
     
   }
-
+  
   getEventoById(){
     this.service.getById(this.eventoId).subscribe(resp => {
       this.habilitarCartao = resp.habilitarCartao;
@@ -236,7 +292,7 @@ export class InscricaoDialogComponent implements OnInit{
       });
       
       this.inscricaoForm.get('semGrupo')?.disable();
-
+      
       this.modoVisualizacao = true;
       
     },(error: any) =>{
@@ -255,7 +311,7 @@ export class InscricaoDialogComponent implements OnInit{
       
     });
   }
-
+  
   irParaPagamento(event: any){
     event.preventDefault();
     if (this.linkPgtoCartao) {

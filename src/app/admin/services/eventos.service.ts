@@ -4,7 +4,6 @@ import { map, Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class EventoService {
-  private apiUrl = 'assets/eventos.json'; // simulando backend
   private baseUrl = 'https://backend.rcc-londrina.online/api/v1';
   // private baseUrl = 'http://localhost:5290/api/v1';
 
@@ -13,6 +12,10 @@ export class EventoService {
 
   getEventos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/eventos/get-all`);
+  }
+
+  getUsuarios(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/usuarios-checkin`);
   }
 
   getReenvioComprovante(codigoInscricao: string, email: string): Observable<any> {
@@ -49,6 +52,10 @@ export class EventoService {
     );
   }
 
+  verificarStatus(codigoInscricao: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/eventos/verifica-status?codigoInscricao=${codigoInscricao}`);
+  }
+
   save(evento: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/eventos`,evento)
     .pipe(map((resp: any) => {
@@ -77,6 +84,13 @@ export class EventoService {
 
   getLoteInscricao(eventoId: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/eventos/lote-inscricao?eventoId=${eventoId}`);
+  }
+
+  createUsuarioCheckin(payload: any): Observable<any>{
+    return this.http.post(`${this.baseUrl}/usuarios-checkin`,payload)
+    .pipe(map((resp: any) => {
+      return resp;
+    }));
   }
 
   inscricao(inscricao: any): Observable<any>{
