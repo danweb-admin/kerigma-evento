@@ -32,7 +32,7 @@ export class InscricaoDialogComponent implements OnInit{
   permitirPagamento = false;
   
   valorInscricao!: number;
-  formaSelecionada: 'pix' | 'cartao' | null = null;
+  formaSelecionada: 'pix' | 'cartao' | 'dinheiro' | null = null;
   modoVisualizacao = false;
   qrCode = false;
   mostrarCartao =  true;
@@ -43,8 +43,11 @@ export class InscricaoDialogComponent implements OnInit{
   copiado = false;
   codigoInscricao: string = '';
   linkPgtoCartao: string = '';
+  pagoDinheiro: boolean = false;
   habilitarPix: boolean = false;
   habilitarCartao: boolean = false;
+  habilitarDinheiro: boolean = false;
+
   qtdParcelas: number = 1;
   // Tempo total do Pix (em segundos)
   tempoTotalPix = 15 * 60; // 15 minutos
@@ -214,6 +217,12 @@ export class InscricaoDialogComponent implements OnInit{
         this.mostrarQRCode = false
         this.linkPgtoCartao = resp.linkPgtoCartao;
       }
+
+      if (resp.tipoPagamento === 'dinheiro'){
+        this.toastr.success('Inscrição realizada com sucesso.!');
+        this.pagoDinheiro = true;
+        this.statusPagamento = 'PAGO';
+      }
       
       this.codigoInscricao = resp.codigoInscricao;
       this.bloquearConfirmar = true;
@@ -262,6 +271,7 @@ export class InscricaoDialogComponent implements OnInit{
     this.service.getById(this.eventoId).subscribe(resp => {
       this.habilitarCartao = resp.habilitarCartao;
       this.habilitarPix = resp.habilitarPix;
+      this.habilitarDinheiro = resp.habilitarDinheiro;
       this.qtdParcelas = resp.qtdParcelas;
     });
   }

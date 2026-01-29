@@ -73,6 +73,7 @@ export class EventoFormComponent implements OnInit {
       organizadorContato: ['', Validators.required],
       habilitarPix: [false],
       habilitarCartao: [false],
+      habilitarDinheiro: [false],
       qtdParcelas: [1],
       bannerImagem: ['', Validators.required],
       status: ['Criado', Validators.required],
@@ -391,6 +392,7 @@ export class EventoFormComponent implements OnInit {
           exibirInformacoesAdicionais: evento.exibirInformacoesAdicionais,
           habilitarPix: evento.habilitarPix,
           habilitarCartao: evento.habilitarCartao,
+          habilitarDinheiro: evento.habilitarDinheiro,
           qtdParcelas: evento.qtdParcelas,
           
         });
@@ -487,6 +489,8 @@ export class EventoFormComponent implements OnInit {
       return 'Pix'
     if (tipoPagamento == 'cartao')
       return 'Cartão'
+    if (tipoPagamento == 'dinheiro')
+      return 'Dinheiro'
     return ''
   }
   

@@ -106,6 +106,24 @@
           </p>
         </div>
         
+        <!-- CONTEÚDO NORMAL (DINHEIRO) -->
+        <ng-container *ngIf="statusPagamento !== 'PAGO'">
+          <div *ngIf="habilitarDinheiro" class="pagamento-card" [class.selected]="formaSelecionada === 'dinheiro'" (click)="formaPagamento('dinheiro')">
+              
+            <h4 class="font-bold mb-2">Pagamento em Dinheiro</h4>
+
+            <div *ngIf="pagoDinheiro" class="text-center">
+              
+              <h3>✅ Inscrição realizada</h3>
+              
+              <p>
+                Sua inscrição foi registrada.<br>
+              </p>
+            </div>
+          </div>
+        </ng-container>
+        
+        
         <!-- CONTEÚDO NORMAL (PIX / CARTÃO) -->
         <ng-container *ngIf="statusPagamento !== 'PAGO'">
           
