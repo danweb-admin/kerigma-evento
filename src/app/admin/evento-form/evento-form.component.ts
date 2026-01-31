@@ -393,7 +393,7 @@ export class EventoFormComponent implements OnInit {
           habilitarPix: evento.habilitarPix,
           habilitarCartao: evento.habilitarCartao,
           habilitarDinheiro: evento.habilitarDinheiro,
-          qtdParcelas: evento.qtdParcelas,
+          qtdParcelas: evento.qtdParcelas, 
           
         });
         
