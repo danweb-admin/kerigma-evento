@@ -5,7 +5,8 @@ import { EventoService } from '../services/eventos.service';
 
 @Component({
   selector: 'app-evento-list',
-  templateUrl: './evento-list.component.html'
+  templateUrl: './evento-list.component.html',
+  styleUrls: ['./evento-list.component.scss']
 })
 export class EventoListComponent implements OnInit {
   private apiUrl = 'assets/eventos.json';

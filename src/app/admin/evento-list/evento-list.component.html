@@ -38,7 +38,8 @@
                             'bg-secondary': evento.status === 'Criado',
                             'bg-info': evento.status === 'Em andamento',
                             'bg-danger': evento.status === 'Cancelado',
-                            'bg-success': evento.status === 'Publicado'
+                            'bg-success': evento.status === 'Publicado',
+                            'badge-encerrado': evento.status === 'Encerradas'
                         }"
                         >
                         {{ evento.status }}
