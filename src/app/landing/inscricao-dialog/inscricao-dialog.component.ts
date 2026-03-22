@@ -181,7 +181,6 @@ export class InscricaoDialogComponent implements OnInit{
 
         this.valorInscricao = this.valorInscricao * valueQtd;
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
-        this.bloquearConfirmar = false;
       }
 
       if (this.inscricaoForm.invalid) {
@@ -190,7 +189,7 @@ export class InscricaoDialogComponent implements OnInit{
       }
 
       this.selectedTab = 'pagamento'
-      
+      this.bloquearConfirmar = false;
       // lógica para ir à próxima aba (Forma de Pagamento)
     }
     
