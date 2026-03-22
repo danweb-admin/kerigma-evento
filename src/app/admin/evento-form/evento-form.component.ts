@@ -78,6 +78,7 @@ export class EventoFormComponent implements OnInit {
       bannerImagem: ['', Validators.required],
       capaImagem: ['', Validators.required],
       status: ['Criado', Validators.required],
+      limiteParticipantes: [0],
       local: this.fb.group({
         id: [null],
         eventoId: [null],
@@ -419,6 +420,7 @@ export class EventoFormComponent implements OnInit {
           organizadorEmail: evento.organizadorEmail,
           organizadorContato: evento.organizadorContato,
           status: evento.status,
+          limiteParticipantes: evento.limiteParticipantes,
           local: evento.local || {},
           sobre: evento.sobre || {},
           informacoesAdicionais: evento.informacoesAdicionais || {},
