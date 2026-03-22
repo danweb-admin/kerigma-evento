@@ -169,11 +169,26 @@ export class InscricaoDialogComponent implements OnInit{
     }
     
     proximo() {
+      var quantidade = this.inscricaoForm.get('quantidade')
+      
+      if (quantidade != null){
+        var valueQtd = quantidade?.value;
+
+        if (valueQtd == 0){
+          this.toastr.error('Quantidade não pode ser 0!');
+          return;
+        }
+
+        this.valorInscricao = this.valorInscricao * valueQtd;
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        this.bloquearConfirmar = false;
+      }
+
       if (this.inscricaoForm.invalid) {
         this.inscricaoForm.markAllAsTouched();
         return;
       }
-      
+
       this.selectedTab = 'pagamento'
       
       // lógica para ir à próxima aba (Forma de Pagamento)
@@ -309,8 +324,6 @@ export class InscricaoDialogComponent implements OnInit{
       }
       
       this.service.verificarCPF(cpf,this.eventoId).subscribe(resp => {
-        
-        
         this.inscricaoForm.patchValue({
           servoId: resp.id,
           cpf: cpf,
