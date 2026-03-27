@@ -90,6 +90,10 @@ export class EventoService {
     return this.http.get<any[]>(`${this.baseUrl}/eventos/lote-inscricao?eventoId=${eventoId}`);
   }
 
+  getLimiteParticipantes(eventoId: string): Observable<any> {
+    return this.http.get<any[]>(`${this.baseUrl}/eventos/verifica-limite-participantes?eventoId=${eventoId}`);
+  }
+
   createUsuarioCheckin(payload: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/usuarios-checkin`,payload)
     .pipe(map((resp: any) => {

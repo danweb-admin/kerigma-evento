@@ -40,7 +40,7 @@ export class InscricaoDialogComponent implements OnInit{
   bloquearConfirmar = false;
   qrCodeLink: string  = ''
   qrCodePNG: string  = ''
-  
+
   pixCopiaECola: string = '';
   copiado = false;
   codigoInscricao: string = '';
@@ -123,7 +123,6 @@ export class InscricaoDialogComponent implements OnInit{
     });
     
     this.buscaLoteInscricao();
-    
   }
   
   formatarTempo(): string {
@@ -167,7 +166,7 @@ export class InscricaoDialogComponent implements OnInit{
         }
       });
     }
-    
+
     proximo() {
       var quantidade = this.inscricaoForm.get('quantidade')
       
@@ -190,7 +189,16 @@ export class InscricaoDialogComponent implements OnInit{
 
       this.selectedTab = 'pagamento'
       this.bloquearConfirmar = false;
-      // lógica para ir à próxima aba (Forma de Pagamento)
+
+      // verifica se atingiu o limite de participantes
+      this.service.getLimiteParticipantes(this.eventoId).subscribe({
+        next: (valor) => {
+          if (!valor){
+            this.toastr.error('As inscrições desse Evento foram encerradas!');
+            this.bloquearConfirmar = true;
+          }
+        }
+      });
     }
     
     
