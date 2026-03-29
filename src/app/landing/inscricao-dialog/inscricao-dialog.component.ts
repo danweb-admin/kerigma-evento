@@ -87,8 +87,8 @@ export class InscricaoDialogComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    this.carregarDecanato();
-    this.carregarGrupoOracoes();
+    // this.carregarDecanato();
+    // this.carregarGrupoOracoes();
     this.carregarCampos();
     this.getEventoById();
     
