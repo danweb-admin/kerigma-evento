@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   eventos: any[] = [];
   menuAberto = false;
-  baseUrl = 'https://backend.rcc-londrina.online/api/v1/eventos/get-all-home';
+  baseUrl = 'https://backend.kerigma-eventos.online/api/v1/eventos/get-all-home';
   // baseUrl = 'http://192.168.15.5:5100/api/v1/eventos/get-all-home';
   // private baseUrl = 'http://localhost:5290/api/v1/eventos/get-all-home';
 
