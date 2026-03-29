@@ -4,7 +4,7 @@ import { map, Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class EventoService {
-  private baseUrl = 'https://backend.rcc-londrina.online/api/v1';
+  private baseUrl = 'https://backend.kerigma-eventos.online/api/v1';
   // private baseUrl = 'http://192.168.15.5:5100/api/v1';
     // private baseUrl = 'http://localhost:5290/api/v1';
 
