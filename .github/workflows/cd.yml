@@ -27,7 +27,7 @@ jobs:
           context: .
           push: true
           tags: |
-            williambr2022/rcc-evento-app-front:latest
-            williambr2022/rcc-evento-app-front:${{ github.sha }}
+            williambr2022/kerigma-evento:latest
+            williambr2022/kerigma-evento:${{ github.sha }}
 
   
