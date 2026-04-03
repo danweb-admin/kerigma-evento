@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private apiUrl = 'https://backend.rcc-londrina.online/api/v1';
+  private apiUrl = 'https://backend.kerigma-eventos.online/api/v1';
   // private apiUrl = 'http://localhost:5290/api/v1';
 
   constructor(private http: HttpClient) {}
