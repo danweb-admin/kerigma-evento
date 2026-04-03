@@ -19,7 +19,7 @@ export class EventoFormComponent implements OnInit {
   abaAtiva = 'dados';
   inscricoes: any[] = [];
   eventoId: string | null = null;
-  baseUrl = 'https://backend.rcc-londrina.online/api/v1/eventos';
+  baseUrl = 'https://backend.kerigma-eventos.online/api/v1/eventos';
   
   editorConfig: AngularEditorConfig = {
     editable: true,
