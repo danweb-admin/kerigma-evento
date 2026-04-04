@@ -16,6 +16,7 @@ export class EventoLandingComponent implements OnInit {
   grupos: any[] = [];
   wazeUrl!: SafeResourceUrl;
   menuAberto = false;
+  
 
   constructor(
     private route: ActivatedRoute,

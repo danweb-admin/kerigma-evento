@@ -1,7 +1,7 @@
 <!-- Header -->
 <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-pink-700">Kerigma Eventos</h1>
+    <h1 class="text-2xl font-bold text-green-500">Kerigma Eventos</h1>
     <button class="md:hidden text-gray-700" (click)="menuAberto = !menuAberto">
       <i class="fa fa-bars text-2xl"></i>
     </button>
@@ -11,7 +11,7 @@
   </div>
 
   <!-- Menu Mobile -->
-  <div *ngIf="menuAberto" class="bg-pink-50 md:hidden border-t border-pink-100">
+  <div *ngIf="menuAberto" class="bg-green-50 md:hidden border-t border-green-100">
     <nav class="flex flex-col space-y-2 py-3 px-4">
       
     </nav>
@@ -19,7 +19,7 @@
 </header>
 
 <!-- Hero Section -->
-<section class="pt-28 pb-12 bg-gradient-to-r from-pink-100 via-white to-pink-50 text-center">
+<section class="pt-28 pb-12 bg-gradient-to-r from-green-100 via-white to-green-50 text-center">
   <h1 class="text-4xl font-extrabold text-gray-800 mb-3">Próximos Eventos</h1>
 </section>
 
@@ -34,7 +34,7 @@
       <h2 class="text-xl font-bold text-gray-800 mb-2">{{ evento.nome }}</h2>
       <span class="font-semibold text-gray-700">Organizador: {{ evento.organizadorNome }} </span>
       <button
-        class="mt-4 bg-pink-600 hover:bg-pink-700 text-white w-full py-2 rounded-lg font-semibold transition" (click)="abrirEvento(evento.slug)">
+        class="mt-4 bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-lg font-semibold transition" (click)="abrirEvento(evento.slug)">
         Ver mais
       </button>
     </div>
@@ -44,6 +44,6 @@
 <!-- Footer -->
 <footer class="bg-gray-900 text-gray-300 text-center py-6 mt-10">
   <p>&copy; 2026 Kerigma Eventos - Todos os direitos reservados</p>
-  <p class="mt-1"> Desenvolvido por <span class="font-semibold text-pink-600">DanWeb Softwares</span>
+  <p class="mt-1"> Desenvolvido por <span class="font-semibold text-green-600">DanWeb Softwares</span>
         </p>
 </footer>
