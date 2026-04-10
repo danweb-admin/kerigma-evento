@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventoService } from 'src/app/admin/services/eventos.service';
 import { ValidateService } from '../services/validate.service';
@@ -14,7 +14,7 @@ interface Decanato {
   styleUrls: ['./inscricao-dialog.component.scss'],
   templateUrl: './inscricao-dialog.component.html',
 })
-export class InscricaoDialogComponent implements OnInit{
+export class InscricaoDialogComponent implements OnInit, AfterViewInit{
   @Input() show = false;
   @Output() closed = new EventEmitter<void>();
   @Input() eventoId!: string;
@@ -40,7 +40,8 @@ export class InscricaoDialogComponent implements OnInit{
   bloquearConfirmar = false;
   qrCodeLink: string  = ''
   qrCodePNG: string  = ''
-
+  eventoEspecial: boolean = false;
+  
   pixCopiaECola: string = '';
   copiado = false;
   codigoInscricao: string = '';
@@ -86,12 +87,13 @@ export class InscricaoDialogComponent implements OnInit{
       
     });
   }
+  
+  
   ngOnInit(): void {
     // this.carregarDecanato();
     // this.carregarGrupoOracoes();
     this.carregarCampos();
     this.getEventoById();
-    
     
     this.inscricaoForm.patchValue({ eventoId: this.eventoId });
     
@@ -123,6 +125,18 @@ export class InscricaoDialogComponent implements OnInit{
     });
     
     this.buscaLoteInscricao();
+    
+  }
+  
+  ngAfterViewInit(): void {
+    this.configuraEventoEspecial();
+  }
+  
+  configuraEventoEspecial(){
+    // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> CURANDO GERACOES IBIPORA
+    if (this.eventoId.toUpperCase() === 'B2C93280-1B2F-4AD2-8AD2-8A09D5341388') {
+      this.eventoEspecial = true;
+    }
   }
   
   formatarTempo(): string {
@@ -166,30 +180,68 @@ export class InscricaoDialogComponent implements OnInit{
         }
       });
     }
-
+    
     proximo() {
       var quantidade = this.inscricaoForm.get('quantidade')
       
-      if (quantidade != null){
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> CURANDO GERACOES IBIPORA
+      if (this.eventoEspecial){
         var valueQtd = quantidade?.value;
-
-        if (valueQtd == 0){
-          this.toastr.error('Quantidade não pode ser 0!');
+        
+        if (valueQtd < 2 ){
+          this.toastr.error('Quantidade de Ingresso mínimo é de 2!');
           return;
         }
-
-        this.valorInscricao = this.valorInscricao * valueQtd;
-        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        
+        if (valueQtd > 6 ){
+          this.toastr.error('Quantidade de Ingresso máximo é de 6!');
+          return;
+        }
+        
+        switch (valueQtd) {
+          case 2:
+          this.valorInscricao = 80
+          break;
+          case 3:
+          this.valorInscricao = 120
+          break;
+          case 4:
+          this.valorInscricao = 140
+          break;
+          case 5:
+          this.valorInscricao = 180
+          break;
+          case 6:
+          this.valorInscricao = 220
+          break;
+        }
+        
       }
-
+      
+      if (!this.eventoEspecial){
+        if (quantidade != null){
+          var valueQtd = quantidade?.value;
+          
+          if (valueQtd == 0){
+            this.toastr.error('Quantidade não pode ser 0!');
+            return;
+          }
+          
+          this.valorInscricao = this.valorInscricao * valueQtd;
+          this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        }
+      }
+      
+      
+      
       if (this.inscricaoForm.invalid) {
         this.inscricaoForm.markAllAsTouched();
         return;
       }
-
+      
       this.selectedTab = 'pagamento'
       this.bloquearConfirmar = false;
-
+      
       // verifica se atingiu o limite de participantes
       this.service.getLimiteParticipantes(this.eventoId).subscribe({
         next: (valor) => {
@@ -224,7 +276,7 @@ export class InscricaoDialogComponent implements OnInit{
         this.toastr.warning('Selecione uma forma de pagamento! Pix ou Cartão')
         return;
       }
-
+      
       if (this.valorInscricao == 0){
         this.toastr.warning('Valor da Inscrição não pode ser 0.')
         return;
@@ -319,6 +371,8 @@ export class InscricaoDialogComponent implements OnInit{
     
     validarCpf(event: any) {
       let cpf = event.target.value;
+      
+      
       
       if (!this.validateService.validarCpf(cpf)){
         this.toastr.warning("CPF Inválido.")
@@ -450,4 +504,5 @@ export class InscricaoDialogComponent implements OnInit{
       );
     }
   }
+  
   

@@ -54,20 +54,20 @@
         </div>-->
         
         <!-- Checkbox -->
-        <div class="flex items-center gap-2 mt-1">
+        <!-- <div class="flex items-center gap-2 mt-1">
           <input type="checkbox" id="semGrupo" formControlName="semGrupo"
           class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500" />
           <label for="semGrupo" class="text-sm text-gray-700">
             Não pertenço a nenhum grupo ou decanato
           </label>
-        </div>
+        </div> -->
         
         <div *ngFor="let campo of camposDinamicos">
           
           <label class="block text-sm font-medium text-gray-700 mb-1">{{campo.label}}</label>
           
           <!-- TEXT -->
-          <input *ngIf="campo.tipo === 'text'" [formControlName]="campo.nomeCampo" type="text" class="form-control" [placeholder]="campo.label">
+          <input *ngIf="campo.tipo === 'text'" [formControlName]="campo.nomeCampo" type="text" class="form-control" [placeholder]="campo.label" oninput="this.value = this.value.toUpperCase()">
           
           <!-- NUMBER -->
           <input *ngIf="campo.tipo === 'number'" [formControlName]="campo.nomeCampo" type="number" class="form-control">
@@ -84,6 +84,10 @@
             <input type="checkbox" [formControlName]="campo.nomeCampo">
             {{ campo.label }}
           </div>
+
+          <!-- TEXTAREA -->
+          <textarea *ngIf="campo.tipo === 'textarea'" [formControlName]="campo.nomeCampo"  class="form-control" rows="4" [placeholder]="campo.label" oninput="this.value = this.value.toUpperCase()">
+          </textarea>
           
         </div>
         
