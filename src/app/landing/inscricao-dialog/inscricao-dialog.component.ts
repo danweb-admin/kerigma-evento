@@ -215,7 +215,6 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.valorInscricao = 220
           break;
         }
-        
       }
       
       if (!this.eventoEspecial){
