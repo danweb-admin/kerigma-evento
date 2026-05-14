@@ -230,7 +230,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
         }
       }
-      
+      this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       
       
       if (this.inscricaoForm.invalid) {
