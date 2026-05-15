@@ -230,6 +230,9 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
         }
       }
+      
+      this.configuraEventoRccRS();
+      
       this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       
       
@@ -252,6 +255,26 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       });
     }
     
+    configuraEventoRccRS(){
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
+      if (this.eventoId.toUpperCase() === '3F8692BD-0253-43B1-B5DE-CFFA526FE5A2') {
+        
+        let acomodacao = this.inscricaoForm.value.acomodaçao;
+        
+        switch (acomodacao) {
+          case 'Casa Família':
+          this.valorInscricao = 120
+          break;
+          case 'Duplo':
+          this.valorInscricao = 180
+          break;
+          case 'Individual':
+          this.valorInscricao = 230
+          break;
+          
+        }
+      }
+    }
     
     fechar() {
       this.closed.emit();
@@ -442,7 +465,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.inscricaoForm.get('grupoOracaoId')?.enable();
           this.inscricaoForm.get('email')?.enable();
           
-          this.toastr.info('Cadastro não encontrado, preencha seus dados.');
+          // this.toastr.info('Cadastro não encontrado, preencha seus dados.');
         } else {
           this.toastr.error('Erro ao buscar CPF.');
         }
@@ -503,5 +526,6 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       );
     }
   }
+  
   
   
