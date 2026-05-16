@@ -186,7 +186,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> CURANDO GERACOES IBIPORA
       if (this.eventoEspecial){
-        var valueQtd = quantidade?.value;
+        var valueQtd = parseInt(quantidade?.value);
         
         if (valueQtd < 2 ){
           this.toastr.error('Quantidade de Ingresso mínimo é de 2!');
@@ -219,7 +219,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       
       if (!this.eventoEspecial){
         if (quantidade != null){
-          var valueQtd = quantidade?.value;
+          var valueQtd = parseInt(quantidade?.value);
           
           if (valueQtd == 0){
             this.toastr.error('Quantidade não pode ser 0!');
