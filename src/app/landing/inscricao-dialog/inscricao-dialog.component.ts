@@ -188,10 +188,10 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       if (this.eventoEspecial){
         var valueQtd = parseInt(quantidade?.value);
         
-        if (valueQtd < 2 ){
-          this.toastr.error('Quantidade de Ingresso mínimo é de 2!');
-          return;
-        }
+        // if (valueQtd < 2 ){
+        //   this.toastr.error('Quantidade de Ingresso mínimo é de 2!');
+        //   return;
+        // }
         
         if (valueQtd > 6 ){
           this.toastr.error('Quantidade de Ingresso máximo é de 6!');
@@ -199,6 +199,9 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         }
         
         switch (valueQtd) {
+          case 1:
+          this.valorInscricao = 40
+          break;
           case 2:
           this.valorInscricao = 80
           break;
