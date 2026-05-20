@@ -32,6 +32,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
   permitirPagamento = false;
   
   valorInscricao!: number;
+  valorInscricaoOriginal!: number;
+
   formaSelecionada: 'pix' | 'cartao' | 'dinheiro' | null = null;
   modoVisualizacao = false;
   qrCode = false;
@@ -293,6 +295,24 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     formaPagamento(forma: any){
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
+      if (this.eventoId.toUpperCase() === '3F8692BD-0253-43B1-B5DE-CFFA526FE5A2' && forma === 'cartao') {
+        this.valorInscricaoOriginal = this.valorInscricao
+
+        this.valorInscricao = this.valorInscricao *  1.031
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
+      if (this.eventoId.toUpperCase() === '3F8692BD-0253-43B1-B5DE-CFFA526FE5A2' && forma === 'pix') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
     }
     
     confirmar() {
