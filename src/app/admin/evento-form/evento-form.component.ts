@@ -202,56 +202,34 @@ export class EventoFormComponent implements OnInit {
   }
   
   downloadCsv(e: any) {
-    e.preventDefault()
-    
-    if (!this.inscricoesFiltradas || this.inscricoesFiltradas.length === 0) {
-      return;
+    e.preventDefault();
+
+    if (this.eventoId === null){
+      
+      return
     }
-    
-    const headers = [
-      'Código Inscrição',
-      'Nome',
-      'CPF',
-      'Telefone',
-      'Grupo de Oração',
-      'Decanato',
-      'Pagamento',
-      'Status'
-    ];
-    
-    
-    
-    const rows = this.inscricoesFiltradas.map(i => [
-      i.codigoInscricao,
-      i.nome,
-      i.cpf,
-      i.telefone,
-      i.grupoOracao,
-      i.decanato,
-      i.tipoPagamento,
-      i.status
-    ]);
-    
-    const csvContent =
-    '\uFEFF' + // BOM para Excel aceitar acentos
-    [
-      headers.join(';'),
-      ...rows.map(row =>
-        row.map(value => `"${(value ?? '').toString().replace(/"/g, '""')}"`).join(';')
-      )
-    ].join('\n');
-    
-    const blob = new Blob([csvContent], {
-      type: 'text/csv;charset=utf-8;'
-    });
-    
+
+
+    this.eventoService.exportCSV(this.eventoId).subscribe(resp => {
+
+    const blob = resp.body!;
+    const contentDisposition = resp.headers.get('content-disposition');
+    let fileName = 'inscricoes.xlsx';
+
+    if (contentDisposition) {
+      const match = contentDisposition.match(/filename="(.+)"/);
+      if (match) fileName = match[1];
+    }
+
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
+
     a.href = url;
-    a.download = `inscricoes_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = fileName;
     a.click();
-    
+
     window.URL.revokeObjectURL(url);
+  });
   }
   
   
