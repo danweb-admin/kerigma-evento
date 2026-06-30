@@ -356,8 +356,8 @@
                         <th class="border p-2 text-left whitespace-nowrap">Nome</th>
                         <th class="border p-2 text-left whitespace-nowrap">CPF</th>
                         <th class="border p-2 text-left whitespace-nowrap">Telefone</th>
-                        <th class="border p-2 text-left whitespace-nowrap">Grupo de Oração</th>
-                        <th class="border p-2 text-left whitespace-nowrap">Decanato</th>
+                        <th class="border p-2 text-left whitespace-nowrap">Valor Inscrição</th>
+                        <th class="border p-2 text-left whitespace-nowrap">Data Pag.</th>
                         <th class="border p-2 text-left whitespace-nowrap">Pagamento</th>
                         <th class="border p-2 text-left whitespace-nowrap">Status</th>
                         <th class="border p-2 text-left whitespace-nowrap">Ação</th>
@@ -370,8 +370,8 @@
                         <td class="border p-2 whitespace-nowrap">{{ i.nome }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ i.cpf }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ i.telefone }}</td>
-                        <td class="border p-2 whitespace-nowrap">{{ i.grupoOracao }}</td>
-                        <td class="border p-2 whitespace-nowrap">{{ i.decanato }}</td>
+                        <td class="border p-2 whitespace-nowrap">{{ i.valorInscricao | number:'1.2-2':'pt-BR'  }}</td>
+                        <td class="border p-2 whitespace-nowrap">{{ i.dataLiberacao | date:'dd/MM/yyyy':'':'pt-BR' }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ descreverTipoPagameto(i.tipoPagamento) }}</td>
                         <td class="border p-2 whitespace-nowrap">
                             <span [ngClass]="{
