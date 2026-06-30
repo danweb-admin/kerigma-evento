@@ -370,8 +370,8 @@
                         <td class="border p-2 whitespace-nowrap">{{ i.nome }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ i.cpf }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ i.telefone }}</td>
-                        <td class="border p-2 whitespace-nowrap">{{ i.valorInscricao | number:'1.2-2':'pt-BR'  }}</td>
-                        <td class="border p-2 whitespace-nowrap">{{ i.dataLiberacao | date:'dd/MM/yyyy':'':'pt-BR' }}</td>
+                        <td class="border p-2 whitespace-nowrap">{{ i.valorInscricao | number:'1.2-2'  }}</td>
+                        <td class="border p-2 whitespace-nowrap">{{ i.dataLiberacao | date:'dd/MM/yyyy' }}</td>
                         <td class="border p-2 whitespace-nowrap">{{ descreverTipoPagameto(i.tipoPagamento) }}</td>
                         <td class="border p-2 whitespace-nowrap">
                             <span [ngClass]="{
