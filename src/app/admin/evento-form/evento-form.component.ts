@@ -80,6 +80,7 @@ export class EventoFormComponent implements OnInit {
       status: ['Criado', Validators.required],
       limiteParticipantes: [0],
       taxaServico: [0],
+      eventoGratuito: [false],
       local: this.fb.group({
         id: [null],
         eventoId: [null],
@@ -134,6 +135,7 @@ export class EventoFormComponent implements OnInit {
     ).subscribe(() => {
       this.aplicarFiltros();
     });
+
   }
   
   // Total de páginas calculadas dinamicamente
@@ -381,7 +383,7 @@ export class EventoFormComponent implements OnInit {
         ? dados.find(e => e.id == id)
         : dados;
 
-        
+        console.log(evento);
         if (!evento) {
           console.error('Evento não encontrado!');
           return;
@@ -401,6 +403,7 @@ export class EventoFormComponent implements OnInit {
           status: evento.status,
           limiteParticipantes: evento.limiteParticipantes,
           taxaServico: evento.taxaServico,
+          eventoGratuito: evento.eventoGratuito,
 
           local: evento.local || {},
           sobre: evento.sobre || {},

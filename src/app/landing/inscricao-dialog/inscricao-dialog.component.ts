@@ -29,6 +29,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
   gruposComFiltro: any[] = []; 
   
   semGrupo = false;
+  eventoGratuito = false;
   permitirPagamento = false;
   
   valorInscricao!: number;
@@ -61,7 +62,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
   
   pixExpirado = false;
   private timerPix: any;
-  statusPagamento: 'PENDENTE' | 'PAGO' | 'EXPIRADO' = 'PENDENTE';
+  statusPagamento: 'PENDENTE' | 'PAGO' | 'EXPIRADO' | 'GRATUITO' = 'PENDENTE';
   private pollingPix: any;
   
   constructor(private fb: FormBuilder,
@@ -186,41 +187,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     proximo() {
       var quantidade = this.inscricaoForm.get('quantidade')
       
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> CURANDO GERACOES IBIPORA
-      if (this.eventoEspecial){
-        var valueQtd = parseInt(quantidade?.value);
-        
-        // if (valueQtd < 2 ){
-        //   this.toastr.error('Quantidade de Ingresso mínimo é de 2!');
-        //   return;
-        // }
-        
-        if (valueQtd > 6 ){
-          this.toastr.error('Quantidade de Ingresso máximo é de 6!');
-          return;
-        }
-        
-        switch (valueQtd) {
-          case 1:
-          this.valorInscricao = 40
-          break;
-          case 2:
-          this.valorInscricao = 80
-          break;
-          case 3:
-          this.valorInscricao = 120
-          break;
-          case 4:
-          this.valorInscricao = 140
-          break;
-          case 5:
-          this.valorInscricao = 180
-          break;
-          case 6:
-          this.valorInscricao = 220
-          break;
-        }
-      }
+
       
       if (!this.eventoEspecial){
         if (quantidade != null){
@@ -316,13 +283,17 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     }
     
     confirmar() {
+
+      if (this.eventoGratuito){
+        this.inscricaoForm.patchValue({tipoPagamento: 'gratuito'})
+      }
       
-      if (!this.formaSelecionada){
+      if (!this.formaSelecionada && !this.eventoGratuito){
         this.toastr.warning('Selecione uma forma de pagamento! Pix ou Cartão')
         return;
       }
       
-      if (this.valorInscricao == 0){
+      if (this.valorInscricao == 0 && !this.eventoGratuito){
         this.toastr.warning('Valor da Inscrição não pode ser 0.')
         return;
       }
@@ -337,7 +308,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       
       // Aqui você envia a forma de pagamento para o backend
       this.service.inscricao(payload).subscribe(resp => {
-        
+      
         if (resp.tipoPagamento === 'pix'){
           this.toastr.success('A inscrição será efetivada após o pagamento, verifique seu email!');
           
@@ -361,13 +332,17 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.pagoDinheiro = true;
           this.statusPagamento = 'PAGO';
         }
+
+        if (resp.tipoPagamento === 'gratuito'){
+          this.toastr.success('Inscrição realizada com sucesso.!');
+          this.statusPagamento = 'GRATUITO';
+        }
         
         this.codigoInscricao = resp.codigoInscricao;
         this.bloquearConfirmar = true;
       },(error: any) =>{
         this.toastr.warning(error.error.message)
       });
-      
     }
     
     iniciarTimerPix() {
@@ -407,6 +382,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     
     getEventoById(){
       this.service.getById(this.eventoId).subscribe(resp => {
+        
+        this.eventoGratuito = resp.eventoGratuito;
         this.habilitarCartao = resp.habilitarCartao;
         this.habilitarPix = resp.habilitarPix;
         this.habilitarDinheiro = resp.habilitarDinheiro;
