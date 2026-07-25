@@ -280,6 +280,24 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         this.valorInscricao = this.valorInscricaoOriginal
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
+      if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989' && forma === 'cartao') {
+        this.valorInscricaoOriginal = this.valorInscricao
+
+        this.valorInscricao = this.valorInscricao *  1.04
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
+      if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989' && forma === 'pix') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
     }
     
     confirmar() {
