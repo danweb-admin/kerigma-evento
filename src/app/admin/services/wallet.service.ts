@@ -12,8 +12,8 @@ const URL_WALLET = 'wallet';
     providedIn: 'root'
 })
 export class WalletService {
-    // private baseUrl = 'https://backend.kerigma-eventos.online/api/v1';
-        private baseUrl = 'http://localhost:5290/api/v1';
+    private baseUrl = 'https://backend.kerigma-eventos.online/api/v1';
+        // private baseUrl = 'http://localhost:5290/api/v1';
 
     constructor(
         private http: HttpClient
