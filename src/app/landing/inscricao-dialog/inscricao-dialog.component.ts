@@ -204,6 +204,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
       
       this.configuraEventoRccRS();
+
+      this.configuraEventoVisitadosPorMaria();
       
       this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       
@@ -247,6 +249,19 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         }
       }
     }
+
+    configuraEventoVisitadosPorMaria(){
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
+      if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989') {
+        
+        let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
+
+        if (quantidadeCrianca > 0){
+          let valorCrianca = quantidadeCrianca * 20;
+          this.valorInscricao += valorCrianca;
+        }
+      }
+    }
     
     fechar() {
       this.closed.emit();
@@ -260,6 +275,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     }
     
     formaPagamento(forma: any){
+      debugger
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
 
@@ -534,6 +550,12 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
             )
           );
         });
+
+        // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
+        if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989') {
+          
+          this.inscricaoForm.patchValue({'criançamenorde10anos?informarquantidade': 0})
+        }
       });
     }
     

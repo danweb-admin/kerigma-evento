@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthLayoutComponent } from './auth/auth-layout.component';
 import { UsuariosFormComponent } from './usuarios/usuarios-form/usuario-form.component';
 import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
+import { EventoWalletComponent } from './evento-wallet/evento-wallet.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.co
     EventoFormComponent,
     SectionListComponent,
     SectionFormComponent,
+    EventoWalletComponent,
     ModalReenvioComponent,
     LoginComponent,
     AuthLayoutComponent,
@@ -33,7 +35,8 @@ import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.co
     FormsModule,
     HttpClientModule,
     AdminRoutingModule,
-    AngularEditorModule
+    AngularEditorModule,
+    
   ]
 })
 export class AdminModule {}

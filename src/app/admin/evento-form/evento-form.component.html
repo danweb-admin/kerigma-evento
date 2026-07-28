@@ -61,6 +61,11 @@
                 [class.border-b-2]="abaAtiva === 'camposFormulario'"
                 (click)="abaAtiva = 'campos'">Campos Formulários</a>
             </li>
+            <li class="mr-4">
+                <a class="cursor-pointer py-2 px-4 block"
+                [class.border-b-2]="abaAtiva === 'financeiro'"
+                (click)="abaAtiva = 'financeiro'">Financeiro</a>
+            </li>
         </ul>
         
         <!-- Aba Dados do Evento -->
@@ -460,7 +465,7 @@
         </div>
     </div>
     
-    
+    <!-- Aba Campos Formulario -->
     <div *ngIf="abaAtiva === 'campos'" formArrayName="eventoCampos">
         
         <div *ngFor="let c of eventoCampos.controls; let i = index" [formGroupName]="i" class="border p-4 rounded mb-4">
@@ -520,6 +525,13 @@
         
         <button type="button" class="bg-green-600 text-white px-4 py-2 rounded" (click)="addCampo()"> + Adicionar Campo</button>
         
+    </div>
+
+    <!-- Aba Financeiro -->
+    <div *ngIf="abaAtiva === 'financeiro'" class="mt-4">
+        <app-evento-wallet
+            [eventoId]="eventoForm.value.id">
+        </app-evento-wallet>
     </div>
     
     

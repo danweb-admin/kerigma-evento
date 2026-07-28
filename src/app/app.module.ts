@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,11 @@ import { NgxMaskModule } from 'ngx-mask';
 import { Interceptor } from './interceptor.service';
 import { SpinnerComponent } from './spinner.component';
 import { TokenInterceptor } from './admin/services/token.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -41,13 +45,16 @@ import { TokenInterceptor } from './admin/services/token.interceptor';
     }),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
-    {
+  { provide: LOCALE_ID, useValue: 'pt-BR' },
+
+  { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   }
-  ],
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
