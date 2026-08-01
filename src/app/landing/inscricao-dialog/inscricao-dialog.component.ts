@@ -237,13 +237,13 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         
         switch (acomodacao) {
           case 'Casa Família':
-          this.valorInscricao = 120
+          this.valorInscricao = 130
           break;
           case 'Duplo':
-          this.valorInscricao = 180
+          this.valorInscricao = 190
           break;
           case 'Individual':
-          this.valorInscricao = 230
+          this.valorInscricao = 240
           break;
           
         }
