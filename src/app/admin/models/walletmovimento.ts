@@ -28,5 +28,6 @@ export interface WalletMovimento {
 
     origem: string;
     nomeParticipante: string;
+    comprovante: string
 
 }
