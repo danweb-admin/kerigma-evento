@@ -45,6 +45,7 @@ export class EventoFormComponent implements OnInit {
   itensPorPagina: number = 10;
   inscricaoSelecionada: any = null;
   isModalOpen = false;
+  isAdmin = false;
   filtroStatus = {
     pendente: true,
     confirmado: true,
@@ -59,7 +60,15 @@ export class EventoFormComponent implements OnInit {
     private router: Router,
     private eventoService: EventoService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    let role = localStorage.getItem('role');
+    if (role === 'admin'){
+      this.isAdmin = true;
+    }else{
+      this.abaAtiva = 'inscricoes';
+
+    }
+  }
   
   ngOnInit(): void {
     this.eventoForm = this.fb.group({
@@ -586,6 +595,8 @@ export class EventoFormComponent implements OnInit {
       }
     });
   }
+
+  
   
   private slugify(text: string): string {
     return text

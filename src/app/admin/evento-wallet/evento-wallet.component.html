@@ -1,312 +1,233 @@
 <div class="space-y-6">
-
     <!-- Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-
         <div class="bg-white rounded-lg shadow border-l-4 border-green-500 p-4">
             <div class="text-sm text-gray-500">
                 Saldo Disponível
             </div>
-
             <div class="text-2xl font-bold text-green-600 mt-2">
                 {{ wallet.saldoDisponivel | currency:'BRL'  }}
             </div>
         </div>
-
         <div class="bg-white rounded-lg shadow border-l-4 border-yellow-500 p-4">
             <div class="text-sm text-gray-500">
                 Saldo Pendente 
             </div>
-
             <div class="text-2xl font-bold text-yellow-600 mt-2">
                 {{ wallet.saldoPendente | currency:'BRL'  }}
             </div>
         </div>
-
         <div class="bg-white rounded-lg shadow border-l-4 border-blue-500 p-4">
             <div class="text-sm text-gray-500">
                 Saldo Repassado
             </div>
-
             <div class="text-2xl font-bold text-blue-600 mt-2">
                 {{ wallet.saldoRepassado | currency:'BRL'  }}
             </div>
         </div>
-
         <div class="bg-white rounded-lg shadow border-l-4 border-indigo-500 p-4">
             <div class="text-sm text-gray-500">
                 Receita Total
             </div>
-
             <div class="text-2xl font-bold text-indigo-600 mt-2">
                 {{ wallet.receitaTotal | currency:'BRL'  }}
             </div>
         </div>
-
     </div>
 
     <!-- Filtros -->
 
     <div class="bg-white rounded-lg shadow p-4">
-
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-
             <div>
                 <label class="text-sm text-gray-600 block mb-1">
                     Data Inicial
                 </label>
-
                 <input
                     type="date"
                     [(ngModel)]="filtro.dataInicial"
                     (change)="filtrar()"
                     class="w-full border rounded px-3 py-2">
             </div>
-
             <div>
-
                 <label class="text-sm text-gray-600 block mb-1">
                     Data Final
                 </label>
-
                 <input
                     type="date"
                     [(ngModel)]="filtro.dataFinal"
                     (change)="filtrar()"
                     class="w-full border rounded px-3 py-2">
-
             </div>
-
             <div>
-
                 <label class="text-sm text-gray-600 block mb-1">
                     Tipo
                 </label>
-
                 <select
                     [(ngModel)]="filtro.tipo"
                     (change)="filtrar()"
                     class="w-full border rounded px-3 py-2">
-
                     <option
                         *ngFor="let tipo of tipos"
                         [value]="tipo">
-
                         {{ tipo }}
-
                     </option>
-
                 </select>
-
             </div>
 
             <div class="md:col-span-2">
-
                 <label class="text-sm text-gray-600 block mb-1">
                     Pesquisar
                 </label>
-
                 <input
                     type="text"
                     placeholder="Descrição..."
                     [(ngModel)]="filtro.pesquisa"
                     (keyup)="filtrar()"
                     class="w-full border rounded px-3 py-2">
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Totais -->
 
     <div class="flex justify-between">
-
         <div class="text-green-600 font-semibold">
             Entradas:
             {{ totalEntradas | currency:'BRL':'symbol':'1.2-2':'pt' }}
         </div>
-
         <div class="text-red-600 font-semibold">
             Saídas:
             {{ totalSaidas | currency:'BRL':'symbol':'1.2-2':'pt' }}
         </div>
-
     </div>
 
     <!-- Extrato -->
 
     <div class="bg-white rounded-lg shadow overflow-auto">
-
         <table class="min-w-full">
-
             <thead class="bg-gray-100">
-
                 <tr>
-
                     <th class="px-4 py-3 text-left">
                         Data
                     </th>
-
                     <th class="px-4 py-3 text-left">
                         Tipo
                     </th>
-
                     <th class="px-4 py-3 text-left">
                         Descrição
                     </th>
-
                     <th class="px-4 py-3 text-left">
                         Inscrição
                     </th>
-
                     <th class="px-4 py-3 text-left">
                         Nome Participante
                     </th>
-
                     <th class="px-4 py-3 text-right">
                         Entrada
                     </th>
-
                     <th class="px-4 py-3 text-right">
                         Saída
                     </th>
-
                     <th class="px-4 py-3 text-right">
                         Saldo
                     </th>
-
                 </tr>
-
             </thead>
-
             <tbody>
-
                 <tr
                     *ngFor="let item of movimentosFiltro"
                     class="border-t hover:bg-gray-50">
-
                     <td class="px-4 py-3 whitespace-nowrap">
-
                         {{ item.dataMovimento | date:'dd/MM/yyyy HH:mm' }}
-
                     </td>
-
                     <td class="px-4 py-3">
-
                         <span
                             class="bg-gray-200 rounded-full px-3 py-1 text-xs">
-
                             {{ item.tipo }}
-
                         </span>
-
                     </td>
-
                     <td class="px-4 py-3">
-
                         <div class="font-medium">
-
                             {{ item.descricao }}
-
                         </div>
-
                         <div
                             class="text-xs text-gray-500"
                             *ngIf="item.observacao">
-
                             {{ item.observacao }}
-
                         </div>
-
                     </td>
-
                     <td class="px-4 py-3">
-
                         <span class="font-medium">
-
                             {{ item.referencia }}
-
                         </span>
-
                     </td>
-
                     <td class="px-4 py-3">
-
                         <span class="font-medium">
-
                             {{ item.nomeParticipante }}
-
                         </span>
-
                     </td>
-
                     <td class="px-4 py-3 text-right text-green-600 font-semibold">
-
                         <span *ngIf="item.entrada>0">
-
                             {{ item.entrada | currency:'BRL':'symbol':'1.2-2':'pt' }}
-
                         </span>
-
                     </td>
-
                     <td class="px-4 py-3 text-right text-red-600 font-semibold">
-
                         <span *ngIf="item.saida>0">
-
                             {{ item.saida | currency:'BRL':'symbol':'1.2-2':'pt' }}
-
                         </span>
-
                     </td>
-
                     <td class="px-4 py-3 text-right font-bold">
-
                         {{ item.saldoAtual | currency:'BRL':'symbol':'1.2-2':'pt' }}
-
                     </td>
-
                 </tr>
-
                 <tr *ngIf="movimentosFiltro.length==0">
-
                     <td colspan="6" class="py-8 text-center text-gray-400">
-
                         Nenhuma movimentação encontrada.
-
                     </td>
-
                 </tr>
-
             </tbody>
-
         </table>
-
     </div>
 
     <!-- Botões -->
 
     <div class="flex justify-end gap-3">
-
+        <button *ngIf="isAdmin"
+            type="button"
+            class="px-5 py-2 rounded bg-gray-200 hover:bg-gray-300"
+            (click)="abrirRepassesAdmin()">
+            Solicitações de Repasse
+        </button>
         <button
             class="px-5 py-2 rounded bg-gray-200 hover:bg-gray-300"
             (click)="exportarExcel()">
-
             Exportar
-
         </button>
-
         <button
+            type="button"
             class="px-5 py-2 rounded bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-400"
             [disabled]="wallet.saldoDisponivel<=0"
             (click)="solicitarRepasse()">
-
             Solicitar Repasse
-
         </button>
-
     </div>
-
 </div>
+
+<app-evento-repasse
+    *ngIf="showRepasse"
+    [wallet]="wallet"
+    [eventoId]="eventoId"
+    (close)="fecharRepasse()"
+    (saved)="repasseSalvo()">
+</app-evento-repasse>
+
+<app-repasse-admin-modal
+    *ngIf="showRepasseAdmin"
+    [wallet]="wallet"
+    [repasses]="repasses"
+    (closed)="fecharRepassesAdmin()"
+    (aprovarRepasse)="aprovarRepasse($event)"
+    (rejeitarRepasse)="rejeitarRepasse($event)"
+    (pagarRepasse)="pagarRepasse($event)">
+</app-repasse-admin-modal>

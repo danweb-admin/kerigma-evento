@@ -5,43 +5,43 @@
         
         <!-- Tabs -->
         <ul class="flex border-b mb-6">
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'dados'"
                 (click)="abaAtiva = 'dados'">Dados do Evento</a>
             </li>
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'sobre'"
                 (click)="abaAtiva = 'sobre'">Sobre</a>
             </li>
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.text-gray-400]="!eventoForm.get('exibirPregadores')?.value"
                 [class.pointer-events-none]="!eventoForm.get('exibirPregadores')?.value"
                 [class.border-b-2]="abaAtiva === 'pregadores'"
                 (click)="abaAtiva = 'pregadores'">Pregadores</a>
             </li>
-            <li>
+            <li *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.text-gray-400]="!eventoForm.get('exibirProgramacao')?.value"
                 [class.pointer-events-none]="!eventoForm.get('exibirProgramacao')?.value"
                 [class.border-b-2]="abaAtiva === 'programacao'"
                 (click)="abaAtiva = 'programacao'">Programação</a>
             </li>
-            <li>
+            <li *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'local'"
                 (click)="abaAtiva = 'local'">Local</a>
             </li>
-            <li>
+            <li *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.text-gray-400]="!eventoForm.get('exibirInformacoesAdicionais')?.value"
                 [class.pointer-events-none]="!eventoForm.get('exibirInformacoesAdicionais')?.value"
                 [class.border-b-2]="abaAtiva === 'informacoesAdicionais'"
                 (click)="abaAtiva = 'informacoesAdicionais'">Informações Adicionais</a>
             </li>
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'lotes'"
                 (click)="abaAtiva = 'lotes'">Lotes de Inscrição</a>
@@ -51,12 +51,12 @@
                 [class.border-b-2]="abaAtiva === 'inscricoes'"
                 (click)="abaAtiva = 'inscricoes'">Inscrições</a>
             </li>
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'formasPagamento'"
                 (click)="abaAtiva = 'formasPagamento'">Formas de Pagamento</a>
             </li>
-            <li class="mr-4">
+            <li class="mr-4" *ngIf="isAdmin">
                 <a class="cursor-pointer py-2 px-4 block"
                 [class.border-b-2]="abaAtiva === 'camposFormulario'"
                 (click)="abaAtiva = 'campos'">Campos Formulários</a>
@@ -532,20 +532,23 @@
         <app-evento-wallet
             [eventoId]="eventoForm.value.id">
         </app-evento-wallet>
+
+        
     </div>
     
     
     <!-- Botões -->
     <div class="flex justify-end space-x-4 mt-6">
         <button type="button" class="px-6 py-2 bg-gray-400 text-white rounded" (click)="cancelar()">Cancelar</button>
-        <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded">Salvar</button>
+        <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded" *ngIf="isAdmin">Salvar</button>
     </div>
 </form>
 </div>
 
 <app-modal-reenvio *ngIf="isModalOpen"
-[isOpen]="isModalOpen"
-[inscricao]="inscricaoSelecionada"
-(close)="fecharModal()"
-(reenviar)="reenviarComprovante($event)">
+    [isOpen]="isModalOpen"
+    [inscricao]="inscricaoSelecionada"
+    (close)="fecharModal()"
+    (reenviar)="reenviarComprovante($event)">
 </app-modal-reenvio>
+

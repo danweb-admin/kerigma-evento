@@ -291,6 +291,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     
     formaPagamento(forma: any){
       debugger
+      
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
 
@@ -315,10 +316,20 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
       if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989' && forma === 'cartao') {
-        this.valorInscricaoOriginal = this.valorInscricao
+        
 
-        this.valorInscricao = this.valorInscricao *  1.04
-        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
+
+        if (quantidadeCrianca > 0){
+
+          this.valorInscricao = this.valorInscricaoOriginal;
+
+          let valorCrianca = quantidadeCrianca * 20;
+          this.valorInscricao += valorCrianca;
+          this.valorInscricao = this.valorInscricao *  1.04
+
+          this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        }
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
@@ -327,16 +338,25 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.valorInscricaoOriginal = this.valorInscricao
         }
 
-        this.valorInscricao = this.valorInscricaoOriginal
-        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
+
+        if (quantidadeCrianca > 0){
+
+          this.valorInscricao = this.valorInscricaoOriginal;
+
+          let valorCrianca = quantidadeCrianca * 20;
+          this.valorInscricao += valorCrianca;
+          this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        }
       }
-      debugger
+      
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA PORECATU
       if (this.eventoId.toUpperCase() === '4B7C95E5-BC1D-4F0B-B11B-2E3F611F94F2' && forma === 'cartao') {
         this.valorInscricaoOriginal = this.valorInscricao
 
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA PORECATU

@@ -1,0 +1,182 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <!-- Header -->
+        <div class="modal-header">
+            <h2>Solicitações de Repasse</h2>
+            <button
+                type="button"
+                class="btn-close"
+                (click)="fechar()">
+                ×
+            </button>
+        </div>
+
+        <!-- Resumo -->
+        <div class="modal-resumo">
+            <div class="card-resumo">
+                <span class="titulo">Saldo Disponível</span>
+                <span class="valor">
+                    {{ wallet.saldoDisponivel | currency:'BRL' }}
+                </span>
+            </div>
+            <div class="card-resumo">
+                <span class="titulo">Solicitações Pendentes</span>
+                <span class="valor">
+                    {{ quantidadePendentes }}
+                </span>
+            </div>
+            <div class="card-resumo">
+                <span class="titulo">Valor Pendente</span>
+                <span class="valor">
+                    {{ valorPendente | currency:'BRL' }}
+                </span>
+            </div>
+        </div>
+        <!-- Corpo -->
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Beneficiário</th>
+                        <th>Valor</th>
+                        <th>PIX</th>
+                        <th>Status</th>
+                        <th width="180">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of repasses">
+                        <!-- Linha -->
+                        <tr>
+                            <td>
+                                {{ item.dataSolicitacao | date:'dd/MM/yyyy' }}
+                            </td>
+                            <td>
+                                {{ item.nomeBeneficiario }}
+                            </td>
+                            <td>
+                                {{ item.valor | currency:'BRL' }}
+                            </td>
+                            <td>
+                                <div>
+                                    <strong>{{ item.tipoChavePix }}</strong>
+                                </div>
+                                <small>
+                                    {{ item.chavePix }}
+                                </small>
+                            </td>
+                            <td>
+                                <span
+                                    class="status"
+                                    [ngClass]="item.status">
+                                    {{ item.status }}
+                                </span>
+                            </td>
+                            <td>
+
+                                <!-- Aprovar -->
+                                <button
+                                    type="button"
+                                    *ngIf="item.status == 'PENDENTE'"
+                                    class="btn-success"
+                                    (click)="aprovar(item)">
+                                    Aprovar
+                                </button>
+
+                                <!-- Rejeitar -->
+                                <button
+                                    type="button"
+                                    *ngIf="item.status == 'PENDENTE'"
+                                    class="btn-danger"
+                                    (click)="rejeitar(item)">
+                                    Rejeitar
+                                </button>
+                                <!-- Pagar -->
+                                <button
+                                    type="button"
+                                    *ngIf="item.status == 'APROVADO'"
+                                    class="btn-primary"
+                                    (click)="abrirPagamento(item)">
+                                    Pagar
+                                </button>
+
+                                <!-- Visualizar -->
+                                <button
+                                    *ngIf="item.status == 'PAGO'"
+                                    class="btn-secondary"
+                                    (click)="visualizar(item)">
+                                    Visualizar
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Formulário Pagamento -->
+                        <tr *ngIf="repassePagamento?.id == item.id">
+                            <td colspan="6">
+                                <div class="pagamento-box">
+                                    <h3>Confirmar Pagamento</h3>
+                                    <div class="grid">
+                                        <div>
+                                            <label>Beneficiário</label>
+                                            <div>
+                                                {{ item.nomeBeneficiario }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label>Valor</label>
+                                            <div>
+                                                {{ item.valor | currency:'BRL' }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid">
+                                        <div>
+                                            <label>Tipo da Chave PIX</label>
+                                            <div>
+                                                {{ item.tipoChavePix }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label>Chave PIX</label>
+                                            <div>
+                                                {{ item.chavePix }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            URL do Comprovante *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            [(ngModel)]="comprovanteUrl">
+                                    </div>
+
+                                    <div class="acoes-pagamento">
+                                        <button
+                                            class="btn-secondary"
+                                            (click)="cancelarPagamento()">
+                                            Cancelar
+                                        </button>
+
+                                        <button
+                                            class="btn-primary"
+                                            [disabled]="!comprovanteUrl"
+                                            (click)="confirmarPagamento(item)">
+                                            Confirmar Pagamento
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr *ngIf="repasses.length == 0">
+                        <td colspan="6">
+                            Nenhuma solicitação encontrada.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

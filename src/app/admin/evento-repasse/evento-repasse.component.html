@@ -1,0 +1,91 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Solicitar Repasse</h2>
+            <button
+            type="button"
+            class="btn-close"
+            (click)="cancelar()">
+            ×
+        </button>
+    </div>
+    <form
+    [formGroup]="form"
+    (ngSubmit)="solicitar()">
+    
+    <div class="modal-body">
+        <!-- Saldo -->
+        <div class="saldo-box">
+            <span class="saldo-label">
+                Saldo disponível
+            </span>
+            <span class="saldo-value">
+                {{ wallet.saldoDisponivel | currency:'BRL' }}
+            </span>
+        </div>
+        
+        <div class="grid">
+            <div class="form-group">
+                <label>Valor do Repasse *</label>
+                <input
+                type="number"
+                step="0.01"
+                formControlName="valor">
+            </div>
+            <div class="form-group">
+                <label>Tipo da Chave PIX *</label>
+                <select formControlName="tipoChavePix">
+                    <option
+                    *ngFor="let item of tiposPix"
+                    [value]="item">
+                    {{item}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Nome do Beneficiário *</label>
+        <input
+        type="text"
+        formControlName="nomeBeneficiario" style="text-transform: uppercase;">
+    </div>
+    <div class="form-group">
+        <label>Email do Beneficiário *</label>
+        <input
+        type="email" 
+        formControlName="emailBeneficiario" >
+    </div>
+    <div class="form-group">
+        <label>Chave PIX *</label>
+        <input
+        type="text"
+        formControlName="chavePix">
+    </div>
+    
+    <div class="form-group">
+        <label>Observação</label>
+        <textarea
+        rows="4"
+        formControlName="observacao">
+    </textarea>
+</div>
+</div>
+
+<div class="modal-footer">
+    <button
+    type="button"
+    class="btn-secondary"
+    (click)="cancelar()">
+    Cancelar
+</button>
+<button
+type="submit"
+class="btn-primary"
+[disabled]="form.invalid || salvando">
+
+{{ salvando ? 'Enviando...' : 'Solicitar Repasse' }}
+</button>
+</div>
+</form>
+</div>
+</div>

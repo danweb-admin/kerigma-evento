@@ -14,6 +14,8 @@ import { AuthLayoutComponent } from './auth/auth-layout.component';
 import { UsuariosFormComponent } from './usuarios/usuarios-form/usuario-form.component';
 import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
 import { EventoWalletComponent } from './evento-wallet/evento-wallet.component';
+import { EventoRepasseComponent } from './evento-repasse/evento-repasse.component';
+import { RepasseAdminModalComponent } from './repasse-admin/repasse-admin-modal.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { EventoWalletComponent } from './evento-wallet/evento-wallet.component';
     SectionListComponent,
     SectionFormComponent,
     EventoWalletComponent,
+    EventoRepasseComponent,
+    RepasseAdminModalComponent,
     ModalReenvioComponent,
     LoginComponent,
     AuthLayoutComponent,

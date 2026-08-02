@@ -4,31 +4,43 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
+  
+  isPlatformAdmin: boolean = false;
+  
   private apiUrl = 'https://backend.kerigma-eventos.online/api/v1';
   // private apiUrl = 'http://localhost:5290/api/v1';
-
+  
   constructor(private http: HttpClient) {}
-
+  
   login(email: string, senha: string) {
-
+    
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password: senha })
-      .pipe(
-        tap(res => {
-          localStorage.setItem('token', res.token);
-        })
-      );
+    .pipe(
+      tap(res => {
+        
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('role', res.user?.role);
+        
+        if (res.user?.role === 'admin'){
+          this.isPlatformAdmin = true;
+        }
+      })
+    );
   }
-
+  
   logout() {
     localStorage.removeItem('token');
   }
-
+  
   getToken() {
     return localStorage.getItem('token');
   }
-
+  
   isLogged() {
     return !!this.getToken();
+  }
+  
+  get isAdmin(): boolean {
+    return this.isPlatformAdmin;
   }
 }
