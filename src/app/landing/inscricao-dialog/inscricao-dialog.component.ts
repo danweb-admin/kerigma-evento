@@ -321,15 +321,13 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
 
         if (quantidadeCrianca > 0){
-
           this.valorInscricao = this.valorInscricaoOriginal;
 
           let valorCrianca = quantidadeCrianca * 20;
           this.valorInscricao += valorCrianca;
-          this.valorInscricao = this.valorInscricao *  1.04
-
-          this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
         }
+        this.valorInscricao = this.valorInscricao *  1.04
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
@@ -339,20 +337,30 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         }
 
         let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
-
+        
         if (quantidadeCrianca > 0){
-
           this.valorInscricao = this.valorInscricaoOriginal;
 
           let valorCrianca = quantidadeCrianca * 20;
           this.valorInscricao += valorCrianca;
-          this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
         }
+
+        if (quantidadeCrianca === 0){
+          this.valorInscricao = this.valorInscricaoOriginal
+        }
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+
       }
       
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA PORECATU
       if (this.eventoId.toUpperCase() === '4B7C95E5-BC1D-4F0B-B11B-2E3F611F94F2' && forma === 'cartao') {
-        this.valorInscricaoOriginal = this.valorInscricao
+
+        let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
+
+        if (camiseta === "SIM"){
+          this.valorInscricao = this.valorInscricaoOriginal;
+          this.valorInscricao += 58;
+        }
 
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
@@ -365,7 +373,17 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.valorInscricaoOriginal = this.valorInscricao
         }
 
-        this.valorInscricao = this.valorInscricaoOriginal
+        let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
+
+        if (camiseta === "SIM"){
+          this.valorInscricao = this.valorInscricaoOriginal;
+          this.valorInscricao += 58;
+        }
+
+        if (camiseta === "NÃO"){
+          this.valorInscricao = this.valorInscricaoOriginal
+        }
+
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
     }
