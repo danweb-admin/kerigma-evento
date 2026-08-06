@@ -173,6 +173,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         next: (valor) => {
           
           this.valorInscricao = valor;
+          this.valorInscricaoOriginal = valor;
           this.inscricaoForm.patchValue({valorInscricao: valor});
         },
         error: (e) => {
@@ -383,6 +384,26 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         if (camiseta === "NÃO"){
           this.valorInscricao = this.valorInscricaoOriginal
         }
+
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO CURA CAMBE
+      if (this.eventoId.toUpperCase() === 'FF08C07F-1C26-49C5-874F-F2BE8CA1CC93' && forma === 'cartao') {
+
+        
+        this.valorInscricao = this.valorInscricao *  1.04
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+        
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO CURA CAMBE
+      if (this.eventoId.toUpperCase() === 'FF08C07F-1C26-49C5-874F-F2BE8CA1CC93' && forma === 'pix') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
 
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
