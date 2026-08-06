@@ -16,6 +16,7 @@ import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.co
 import { EventoWalletComponent } from './evento-wallet/evento-wallet.component';
 import { EventoRepasseComponent } from './evento-repasse/evento-repasse.component';
 import { RepasseAdminModalComponent } from './repasse-admin/repasse-admin-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { RepasseAdminModalComponent } from './repasse-admin/repasse-admin-modal.
     HttpClientModule,
     AdminRoutingModule,
     AngularEditorModule,
-    
+    NgxMaskModule.forChild()
+
   ]
 })
 export class AdminModule {}
