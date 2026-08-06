@@ -72,7 +72,7 @@
           <input *ngIf="campo.tipo === 'text'" [formControlName]="campo.nomeCampo" type="text" class="form-control" [placeholder]="campo.label" oninput="this.value = this.value.toUpperCase()">
           
           <!-- NUMBER -->
-          <input *ngIf="campo.tipo === 'number'" [formControlName]="campo.nomeCampo" type="number" class="form-control">
+          <input *ngIf="campo.tipo === 'number'" [formControlName]="campo.nomeCampo" type="number" class="form-control" value="0">
           
           <!-- SELECT -->
           <select *ngIf="campo.tipo === 'select'" [formControlName]="campo.nomeCampo" class="form-control">
