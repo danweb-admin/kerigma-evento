@@ -17,6 +17,9 @@ import { SpinnerComponent } from './spinner.component';
 import { TokenInterceptor } from './admin/services/token.interceptor';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { PoliticaPrivacidadeModalComponent } from './shared/politica-privacidade-modal/politica-privacidade-modal.component';
+import { SobreKerigmaModalComponent } from './shared/sobre-kerigma-modal/sobre-kerigma-modal.component';
+import { SharedModule } from './shared/share.module';
 
 
 registerLocaleData(localePt);
@@ -36,6 +39,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     HttpClientModule,
     LandingModule,
+    SharedModule,
     AngularEditorModule,
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot({

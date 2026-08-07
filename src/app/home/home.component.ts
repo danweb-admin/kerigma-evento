@@ -10,21 +10,41 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   eventos: any[] = [];
   menuAberto = false;
+  mostrarPolitica = false;
+  mostrarSobre = false;
+  
   baseUrl = 'https://backend.kerigma-eventos.online/api/v1/eventos/get-all-home';
   // baseUrl = 'http://192.168.15.5:5100/api/v1/eventos/get-all-home';
   // private baseUrl = 'http://localhost:5290/api/v1/eventos/get-all-home';
-
-
+  
+  
   constructor(private http: HttpClient, private router: Router) {}
-
+  
   ngOnInit(): void {
     this.http.get<any[]>(this.baseUrl).subscribe(data => {
       this.eventos = data;
     });
   }
-
+  
   abrirEvento(slug: string) {
     // Navega até a landing page do evento   
     this.router.navigate(['/eventos', slug]);
+  }
+  
+  abrirPolitica() {
+    this.mostrarPolitica = true;
+  }
+  
+  fecharPolitica() {
+    this.mostrarPolitica = false;
+  }
+  
+  abrirSobre() {
+    this.mostrarSobre = true;
+  }
+  
+  
+  fecharSobre() {
+    this.mostrarSobre = false;
   }
 }

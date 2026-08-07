@@ -16,6 +16,8 @@ export class EventoLandingComponent implements OnInit {
   grupos: any[] = [];
   wazeUrl!: SafeResourceUrl;
   menuAberto = false;
+  mostrarPolitica = false;
+  mostrarSobre = false;
   
 
   constructor(
@@ -61,6 +63,23 @@ export class EventoLandingComponent implements OnInit {
     if (!data) return null;
     const d = new Date(data);
     return d.toISOString().split('T')[0]; // retorna yyyy-MM-dd
+  }
+
+  abrirPolitica() {
+    this.mostrarPolitica = true;
+  }
+  
+  fecharPolitica() {
+    this.mostrarPolitica = false;
+  }
+  
+  abrirSobre() {
+    this.mostrarSobre = true;
+  }
+  
+  
+  fecharSobre() {
+    this.mostrarSobre = false;
   }
   
 }

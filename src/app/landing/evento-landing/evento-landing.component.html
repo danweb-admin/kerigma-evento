@@ -158,11 +158,136 @@
 
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white text-center py-6">
-    <p>© 2026 Kerigma Eventos - Todos os direitos reservados</p>
-    <p class="mt-1">
-        Desenvolvido por <span class="font-semibold text-green-600">DanWeb Softwares</span>
+<footer class="bg-gray-900 text-gray-300 mt-16">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+    
+    <!-- Logo -->
+    <div>
+      <h2 class="text-2xl font-bold text-green-500">Kerigma Eventos</h2>
+      <p class="mt-4 text-sm leading-6 text-gray-400">
+        Plataforma completa para gestão de eventos, inscrições online,
+        pagamentos via PIX e cartão, check-in com QR Code e controle financeiro.
+      </p>
+    </div>
+    
+    <!-- Plataforma -->
+    <div>
+      <h3 class="text-white font-semibold mb-4">Plataforma</h3>
+      
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="/eventos" class="hover:text-green-400 transition">
+            Eventos
+          </a>
+        </li>
+        
+        <li>
+          <a href="/organizadores" class="hover:text-green-400 transition">
+            Organizadores
+          </a>
+        </li>
+        
+        
+      </ul>
+    </div>
+    
+    <!-- Institucional -->
+    <div>
+      <h3 class="text-white font-semibold mb-4">Institucional</h3>
+      
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a 
+          href="javascript:void(0)"
+          (click)="abrirSobre()"
+          class="hover:text-green-400 transition">
+          Sobre
+        </a>
+      </li>
+      
+      <li>
+        <a 
+        href="javascript:void(0)"
+        (click)="abrirPolitica()">
+        Política de Privacidade
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- Contato -->
+<div>
+  <h3 class="text-white font-semibold mb-4">Contato</h3>
+  
+  <div class="space-y-3 text-sm">
+    
+    <p>
+      📧 danweb.softwares@gmail.com
     </p>
+    
+    <p>
+      🌐 kerigma-eventos.online
+    </p>
+    
+    <a 
+    href="https://wa.me/5543991424105" 
+    target="_blank"
+    class="flex items-center gap-2 hover:text-green-400 transition"
+    >
+    💬 WhatsApp: (43) 99142-4105
+  </a>
+  
+  <a 
+  href="https://www.instagram.com/kerigma.eventos/" 
+  target="_blank"
+  class="flex items-center gap-2 hover:text-green-400 transition"
+  >
+  📷 Instagram: @kerigma.eventos
+</a>
+
+<div class="flex gap-4 text-2xl pt-2">
+  
+  <a 
+  href="https://www.instagram.com/kerigma.eventos/"
+  target="_blank"
+  class="text-2xl hover:text-green-400 transition">
+
+  <i class="fa-brands fa-instagram"></i>
+
+</a>
+
+<a 
+  href="https://wa.me/5543991424105"
+  target="_blank"
+  class="text-2xl hover:text-green-400 transition">
+
+  <i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="border-t border-gray-700">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+    
+    <span>
+      © 2026 Kerigma Eventos. Todos os direitos reservados.
+    </span>
+    
+    <span class="mt-2 md:mt-0">
+      Desenvolvido por
+      <span class="text-green-500 font-semibold">
+        DanWeb Softwares CNPJ: 61.801.810/0001-31
+      </span>
+    </span>
+    
+  </div>
+</div>
 </footer>
 </div>
 
@@ -173,3 +298,13 @@
 (closed)="fecharModal()" 
 [eventoId]="evento.id">
 </app-inscricao-dialog>
+
+<app-politica-privacidade-modal
+*ngIf="mostrarPolitica"
+(fecharModal)="fecharPolitica()">
+</app-politica-privacidade-modal>
+
+<app-sobre-kerigma-modal
+*ngIf="mostrarSobre"
+(fecharModal)="fecharSobre()">
+</app-sobre-kerigma-modal>
