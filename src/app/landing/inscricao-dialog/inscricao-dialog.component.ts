@@ -59,6 +59,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
   tempoTotalPix = 15 * 60; // 15 minutos
   tempoRestante = this.tempoTotalPix;
   camposDinamicos: any[] = [];
+
+  arrayCamisetaInfantil: any[] = ['02 (L30 - C38) - Infantil','04 (L32 - C42) - Infantil','06 (L34 - C44) - Infantil','08 (L36 - C48) - Infantil','10 (L38 - C52) - Infantil','12 (L40 - C56) - Infantil', '14 (L42 - C58) - Infantil', '16 (L44 - C62) - Infantil' ]
   
   pixExpirado = false;
   private timerPix: any;
@@ -276,6 +278,14 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.valorInscricaoOriginal = this.valorInscricao;
           this.valorInscricao += 58;
         }
+        
+        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
+
+        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
+          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
+        
+        }
+        
       }
     }
     
@@ -362,6 +372,12 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.valorInscricao = this.valorInscricaoOriginal;
           this.valorInscricao += 58;
         }
+        
+        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
+
+        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
+          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
+        }
 
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
@@ -383,6 +399,12 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
         if (camiseta === "NÃO"){
           this.valorInscricao = this.valorInscricaoOriginal
+        }
+        
+        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
+
+        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
+          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
         }
 
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
