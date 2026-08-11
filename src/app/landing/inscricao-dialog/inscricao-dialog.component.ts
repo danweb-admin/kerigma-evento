@@ -188,6 +188,15 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     }
     
     proximo() {
+      let nome = this.inscricaoForm.get('nome')?.value
+      
+      let nomeValidado = nome.split(' ');
+
+      if (nomeValidado.length < 2){
+        this.toastr.error('Informe o nome complento!');
+        return
+
+      }
       var quantidade = this.inscricaoForm.get('quantidade')
       
       if (!this.eventoEspecial){
