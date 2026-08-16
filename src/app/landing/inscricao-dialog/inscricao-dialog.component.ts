@@ -226,6 +226,35 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         this.inscricaoForm.markAllAsTouched();
         return;
       }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> COSTELA FOGO DE CHAO
+      if (this.eventoId.toUpperCase() === '70A18C14-D595-4984-8BC4-1CC0003F9490') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
+
+        let quantidadeConvite = this.inscricaoForm.value["quantidadedeconvite"];
+        let criançasate7anos = this.inscricaoForm.value["criançasate7anos"];
+
+        let somaConvite = 0
+        let somaCrianca = 0
+
+        if (quantidadeConvite > 0){
+          somaConvite = quantidadeConvite * this.valorInscricaoOriginal
+        }
+
+        if (criançasate7anos > 0){
+          somaCrianca = criançasate7anos * 30
+        }
+
+        
+        this.valorInscricao = this.valorInscricaoOriginal + somaConvite + somaCrianca
+
+
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
       
       this.selectedTab = 'pagamento'
       this.bloquearConfirmar = false;
@@ -280,6 +309,27 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     configuraEventoMaranathaPorecatu(){
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA - "Eis que tudo se fez novo"
       if (this.eventoId.toUpperCase() === '4B7C95E5-BC1D-4F0B-B11B-2E3F611F94F2') {
+        
+        let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
+
+        if (camiseta === "SIM"){
+          this.valorInscricaoOriginal = this.valorInscricao;
+          this.valorInscricao += 58;
+        }
+        
+        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
+
+        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
+          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
+        
+        }
+        
+      }
+    }
+
+    configuraCostelaFogoChao(){
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA - "Eis que tudo se fez novo"
+      if (this.eventoId.toUpperCase() === '70A18C14-D595-4984-8BC4-1CC0003F9490') {
         
         let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
 
@@ -456,6 +506,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
+
+      
     }
     
     confirmar() {
@@ -684,7 +736,9 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       .subscribe(campos => {
         this.camposDinamicos = campos;
         
+        
         campos.forEach(campo => {
+          
           this.inscricaoForm.addControl(
             campo.nomeCampo,
             new FormControl(
@@ -692,6 +746,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
               campo.obrigatorio ? Validators.required : null
             )
           );
+          console.log(this.inscricaoForm)
         });
 
         // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
@@ -699,6 +754,14 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           
           this.inscricaoForm.patchValue({'criançamenorde10anos?informarquantidade': 0})
         }
+
+        // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> COSTELA FOGO DE CHAO
+        if (this.eventoId.toUpperCase() === '70A18C14-D595-4984-8BC4-1CC0003F9490') {
+          
+          this.inscricaoForm.patchValue({'quantidadedeconvite': 0})
+          this.inscricaoForm.patchValue({'criançasate7anos': 0})
+        }
+
       });
     }
     
