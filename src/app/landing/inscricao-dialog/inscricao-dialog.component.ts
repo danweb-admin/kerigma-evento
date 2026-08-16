@@ -310,10 +310,28 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     }
     
     formaPagamento(forma: any){
-      debugger
+      
       
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026
+      if (this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' && forma === 'cartao') {
+        this.valorInscricaoOriginal = this.valorInscricao
+
+        this.valorInscricao = this.valorInscricao *  1.04
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026
+      if (this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' && forma === 'pix') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
 
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
