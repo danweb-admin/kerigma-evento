@@ -365,16 +365,16 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
 
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026
-      if (this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' && forma === 'cartao') {
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026, CHA DAS MULHERES, FORMACAO HUMANA I
+      if ((this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' || this.eventoId.toUpperCase() === '72395B95-075D-4980-94DF-74715F8234C2' || this.eventoId.toUpperCase() === '490D3059-20F9-4195-8584-16022761816B') && forma === 'cartao') {
         this.valorInscricaoOriginal = this.valorInscricao
 
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
 
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026
-      if (this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' && forma === 'pix') {
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026, CHA DAS MULHERES, FORMACAO HUMANA I
+      if ((this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' || this.eventoId.toUpperCase() === '72395B95-075D-4980-94DF-74715F8234C2' || this.eventoId.toUpperCase() === '490D3059-20F9-4195-8584-16022761816B') && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
