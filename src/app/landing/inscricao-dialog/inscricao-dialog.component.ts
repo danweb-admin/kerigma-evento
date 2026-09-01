@@ -385,15 +385,15 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
-      if (this.eventoId.toUpperCase() === '3F8692BD-0253-43B1-B5DE-CFFA526FE5A2' && forma === 'cartao') {
+      if (this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' && forma === 'cartao') {
         this.valorInscricaoOriginal = this.valorInscricao
 
-        this.valorInscricao = this.valorInscricao *  1.031
+        this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
-      if (this.eventoId.toUpperCase() === '3F8692BD-0253-43B1-B5DE-CFFA526FE5A2' && forma === 'pix') {
+      if (this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
@@ -440,52 +440,6 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
       }
       
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA PORECATU
-      if (this.eventoId.toUpperCase() === '4B7C95E5-BC1D-4F0B-B11B-2E3F611F94F2' && forma === 'cartao') {
-
-        let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
-
-        if (camiseta === "SIM"){
-          this.valorInscricao = this.valorInscricaoOriginal;
-          this.valorInscricao += 58;
-        }
-        
-        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
-
-        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
-          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
-        }
-
-        this.valorInscricao = this.valorInscricao *  1.04
-        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
-        
-      }
-
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA PORECATU
-      if (this.eventoId.toUpperCase() === '4B7C95E5-BC1D-4F0B-B11B-2E3F611F94F2' && forma === 'pix') {
-        if (this.valorInscricaoOriginal === undefined){
-          this.valorInscricaoOriginal = this.valorInscricao
-        }
-
-        let camiseta = this.inscricaoForm.value["comprarcamiseta?"];
-
-        if (camiseta === "SIM"){
-          this.valorInscricao = this.valorInscricaoOriginal;
-          this.valorInscricao += 58;
-        }
-
-        if (camiseta === "NÃO"){
-          this.valorInscricao = this.valorInscricaoOriginal
-        }
-        
-        let tamanhoCamiseta = this.inscricaoForm.value["tamanhodacamiseta"];
-
-        if (this.arrayCamisetaInfantil.includes(tamanhoCamiseta)) {
-          this.valorInscricao = this.valorInscricao - this.valorInscricaoOriginal
-        }
-
-        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
-      }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO CURA CAMBE
       if (this.eventoId.toUpperCase() === 'FF08C07F-1C26-49C5-874F-F2BE8CA1CC93' && forma === 'cartao') {
@@ -569,6 +523,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         this.codigoInscricao = resp.codigoInscricao;
         this.bloquearConfirmar = true;
       },(error: any) =>{
+        console.log(error);
         this.toastr.warning(error.error.message)
       });
     }
