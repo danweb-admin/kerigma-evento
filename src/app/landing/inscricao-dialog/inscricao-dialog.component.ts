@@ -250,7 +250,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         }
 
         
-        this.valorInscricao = this.valorInscricaoOriginal + somaConvite + somaCrianca
+        this.valorInscricao =  somaConvite + somaCrianca
 
 
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
