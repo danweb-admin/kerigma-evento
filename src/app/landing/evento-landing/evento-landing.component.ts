@@ -18,8 +18,10 @@ export class EventoLandingComponent implements OnInit {
   menuAberto = false;
   mostrarPolitica = false;
   mostrarSobre = false;
-  
+  mostrarConsultaInscricao = false;
+  mesmaData = false;
 
+  
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -31,11 +33,14 @@ export class EventoLandingComponent implements OnInit {
   
   ngOnInit(): void {
     const slug= this.route.snapshot.paramMap.get('slug');
-
+    
     this.service.getSlug(slug).subscribe(ev => {
       this.evento = ev;
       this.gerarMapaWaze();
-
+      if (this.evento.dataFim === this.evento.dataInicio){
+        this.mesmaData = true;
+      }
+      
     });
     
   }
@@ -58,13 +63,13 @@ export class EventoLandingComponent implements OnInit {
   fecharModal() {
     this.showModal = false;
   }
-
+  
   formatarData(data: string | Date): string | null {
     if (!data) return null;
     const d = new Date(data);
     return d.toISOString().split('T')[0]; // retorna yyyy-MM-dd
   }
-
+  
   abrirPolitica() {
     this.mostrarPolitica = true;
   }
@@ -81,5 +86,15 @@ export class EventoLandingComponent implements OnInit {
   fecharSobre() {
     this.mostrarSobre = false;
   }
+  
+  
+  abrirConsultaInscricao(): void {
+    this.mostrarConsultaInscricao = true;
+  }
+  
+  fecharConsultaInscricao(): void {
+    this.mostrarConsultaInscricao = false;
+  }
+  
   
 }

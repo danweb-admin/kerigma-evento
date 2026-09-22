@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InscricaoDialogComponent } from './inscricao-dialog/inscricao-dialog.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from '../shared/share.module';
+import { ConsultaInscricaoDialogComponent } from './consulta-inscricao-dialog/consulta-inscricao-dialog.component';
 
 
 @NgModule({
   declarations: [
     EventoLandingComponent,
-    InscricaoDialogComponent
+    InscricaoDialogComponent,
+    ConsultaInscricaoDialogComponent
   ],
   imports: [
     CommonModule,

@@ -383,6 +383,24 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
 
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
+      if (this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F'  && forma === 'cartao') {
+        this.valorInscricao = this.valorInscricaoOriginal
+
+        this.valorInscricao = this.valorInscricao *  1.06
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
+      if (this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F' && forma === 'pix') {
+        if (this.valorInscricaoOriginal === undefined){
+          this.valorInscricaoOriginal = this.valorInscricao
+        }
+
+        this.valorInscricao = this.valorInscricaoOriginal
+        this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
+      }
+
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
       if (this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' && forma === 'cartao') {
@@ -441,9 +459,9 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
       
 
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO CURA CAMBE
-      if (this.eventoId.toUpperCase() === 'FF08C07F-1C26-49C5-874F-F2BE8CA1CC93' && forma === 'cartao') {
-
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO MULHERES EM ORDEM DE BATALHA
+      if (this.eventoId.toUpperCase() === 'A0D14510-01EC-4FF0-B6F3-F223CA84CC8B' && forma === 'cartao') {
+        this.valorInscricao = this.valorInscricaoOriginal
         
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
@@ -451,7 +469,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ENCONTRO CURA CAMBE
-      if (this.eventoId.toUpperCase() === 'FF08C07F-1C26-49C5-874F-F2BE8CA1CC93' && forma === 'pix') {
+      if (this.eventoId.toUpperCase() === 'A0D14510-01EC-4FF0-B6F3-F223CA84CC8B' && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }

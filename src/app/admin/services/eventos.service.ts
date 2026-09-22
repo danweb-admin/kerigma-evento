@@ -115,4 +115,16 @@ export class EventoService {
     }));
   }
 
+  consultarInscricao( eventoId: string, cpf: string ): Observable<any> { 
+    return this.http.get( `${this.baseUrl}/eventos/consulta-inscricao`, { 
+      params: { eventoId, cpf } 
+    } ); 
+  } 
+  
+  reenviarComprovante( codigoInscricao: string, email: string ): Observable<any> { 
+    return this.http.get( `${this.baseUrl}/eventos/reenvio-comprovante/`, { 
+      params: { codigoInscricao, email } 
+    } ); 
+  }
+
 }
