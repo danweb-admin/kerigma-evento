@@ -20,7 +20,6 @@ export class EventoLandingComponent implements OnInit {
   mostrarSobre = false;
   mostrarConsultaInscricao = false;
   mesmaData = false;
-
   
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +42,18 @@ export class EventoLandingComponent implements OnInit {
       
     });
     
+  }
+  
+  get nomesEvento(): string[] {
+    
+    if (this.evento?.id.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F') { //NOITE DE LOUVOR 
+      return this.evento.nome
+      .split('-')
+      .map((parte: string) => parte.trim().replace(/\s+/g, ' '))
+      .filter((parte: string | any[]) => parte.length > 0);
+    }
+    
+    return [this.evento?.nome || ''];
   }
   
   isMobile(): boolean {
