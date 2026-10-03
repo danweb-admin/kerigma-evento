@@ -46,7 +46,7 @@ export class EventoLandingComponent implements OnInit {
   
   get nomesEvento(): string[] {
     
-    if (this.evento?.id.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F') { //NOITE DE LOUVOR 
+    if (this.evento?.id.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F' || this.evento?.id.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2') { //NOITE DE LOUVOR 
       return this.evento.nome
       .split('-')
       .map((parte: string) => parte.trim().replace(/\s+/g, ' '))

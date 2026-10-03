@@ -215,7 +215,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       
       this.configuraEventoRccRS();
 
-      this.configuraEventoVisitadosPorMaria();
+      this.configuraEventoAlimentacaoNoiteLouvor();
 
       this.configuraEventoMaranathaPorecatu();
       
@@ -291,18 +291,52 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
     }
 
-    configuraEventoVisitadosPorMaria(){
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
-      if (this.eventoId.toUpperCase() === 'CCC8913C-F056-4FD4-A3EC-E1F3EC8D0989') {
+    configuraEventoAlimentacaoNoiteLouvor(){
+      
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ALIMENTACAO NOITE DE LOUVOR
+      if (this.eventoId.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2') {
         
-        let quantidadeCrianca = this.inscricaoForm.value["criançamenorde10anos?informarquantidade"];
+        this.valorInscricao = 0
+        
+        let somaCheesSalada = 0
+        let cheesesalada = this.inscricaoForm.value["cheesesalada"];
 
-        if (quantidadeCrianca > 0){
-          this.valorInscricaoOriginal = this.valorInscricao;
+        somaCheesSalada = cheesesalada * 30
 
-          let valorCrianca = quantidadeCrianca * 20;
-          this.valorInscricao += valorCrianca;
-        }
+        let somaCheeseBurguer = 0
+        let cheeseBurgue = this.inscricaoForm.value["cheeseburger"];
+
+        somaCheeseBurguer = cheeseBurgue * 30
+
+        let somaCocaLata = 0
+        let cocalata = this.inscricaoForm.value["coca-lata"];
+
+        somaCocaLata = cocalata * 6.5
+
+        let somaCocaZeroLata = 0
+        let cocaZerolata = this.inscricaoForm.value["cocazero-lata"];
+
+        somaCocaZeroLata = cocaZerolata * 6.5
+
+        let somaGuaranaLata = 0
+        let guaranalata = this.inscricaoForm.value["guarana-lata"];
+
+        somaGuaranaLata = guaranalata * 6.5
+
+        
+        let somaaguacomgas = 0
+        let aguacomgas = this.inscricaoForm.value["aguacomgas"];
+
+        somaaguacomgas = aguacomgas * 4.5
+
+        let somaaguasemgas = 0
+        let aguasemgas = this.inscricaoForm.value["aguacomgas"];
+
+        somaaguasemgas = aguasemgas * 4.5
+
+        this.valorInscricao = somaCheesSalada + somaCheeseBurguer + somaCocaLata + somaCocaZeroLata + somaGuaranaLata + somaaguacomgas + somaaguasemgas;
+        this.valorInscricaoOriginal = this.valorInscricao
+      
       }
     }
 
@@ -327,7 +361,8 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
     }
 
-    configuraCostelaFogoChao(){
+
+    configuraCostelaFogoChao1(){
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> MARANATHA - "Eis que tudo se fez novo"
       if (this.eventoId.toUpperCase() === '70A18C14-D595-4984-8BC4-1CC0003F9490') {
         
@@ -384,7 +419,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
-      if (this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F'  && forma === 'cartao') {
+      if ((this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F' || this.eventoId.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2')  && forma === 'cartao') {
         this.valorInscricao = this.valorInscricaoOriginal
 
         this.valorInscricao = this.valorInscricao *  1.06
@@ -392,7 +427,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
-      if (this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F' && forma === 'pix') {
+      if ((this.eventoId.toUpperCase() === '7CE3BEDA-438F-4B3A-84AD-6E1551447F9F' || this.eventoId.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2') && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
@@ -719,7 +754,6 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
               campo.obrigatorio ? Validators.required : null
             )
           );
-          console.log(this.inscricaoForm)
         });
 
         // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> VISITADOS POR MARIA
@@ -727,12 +761,18 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           
           this.inscricaoForm.patchValue({'criançamenorde10anos?informarquantidade': 0})
         }
-
-        // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> COSTELA FOGO DE CHAO
-        if (this.eventoId.toUpperCase() === '70A18C14-D595-4984-8BC4-1CC0003F9490') {
+        
+        // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> ALIMENTACAO NOITE DE LOUVOR
+        if (this.eventoId.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2') {
           
-          this.inscricaoForm.patchValue({'quantidadedeconvite': 0})
-          this.inscricaoForm.patchValue({'criançasate7anos': 0})
+          this.inscricaoForm.patchValue({'cheesesalada': 0})
+          this.inscricaoForm.patchValue({'cheeseburger': 0})
+          this.inscricaoForm.patchValue({'coca-lata': 0})
+          this.inscricaoForm.patchValue({'guarana-lata': 0})
+          this.inscricaoForm.patchValue({'cocazero-lata': 0})
+          this.inscricaoForm.patchValue({'aguacomgas': 0})
+          this.inscricaoForm.patchValue({'aguasemgas': 0})
+
         }
 
       });

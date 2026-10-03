@@ -394,9 +394,7 @@ export class EventoFormComponent implements OnInit {
         ? dados.find(e => e.id == id)
         : dados;
 
-        console.log(evento);
         if (!evento) {
-          console.error('Evento não encontrado!');
           return;
         }
         
