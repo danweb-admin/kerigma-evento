@@ -21,9 +21,7 @@
             <li *ngIf="evento.exibirInformacoesAdicionais"><a routerLink="." fragment="informacoes" class="block px-4 py-2 hover:text-green-600">Informações</a></li>
         </ul>
         
-        <button (click)="abrirModal()" class="hidden md:block border px-4 py-2 rounded-full hover:bg-green-100">
-            Inscrições
-        </button>
+        
     </nav>
     
     
@@ -50,8 +48,11 @@
                 a <b>{{ evento.dataFim | date:'dd/MM/yyyy' }}</b>
             </p>
             
-            <button (click)="abrirModal()" class="mt-8 bg-green-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-600 transition">
+            <button *ngIf="!alimentacao" (click)="abrirModal()" class="mt-8 bg-green-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-600 transition">
                 INSCREVA-SE
+            </button>
+            <button *ngIf="alimentacao" (click)="abrirModal()" class="mt-8 bg-green-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-600 transition">
+                FAÇA SEU PEDIDO
             </button>
         </div>
     </div>

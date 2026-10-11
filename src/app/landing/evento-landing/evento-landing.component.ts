@@ -20,6 +20,7 @@ export class EventoLandingComponent implements OnInit {
   mostrarSobre = false;
   mostrarConsultaInscricao = false;
   mesmaData = false;
+  alimentacao = false;
   
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,10 @@ export class EventoLandingComponent implements OnInit {
       }
       
     });
+
+    if (slug?.match('alimentacao')){
+      this.alimentacao = true;
+    }
     
   }
   
