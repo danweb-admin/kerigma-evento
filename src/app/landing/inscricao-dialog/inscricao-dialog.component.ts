@@ -301,25 +301,13 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         let somaCheesSalada = 0
         let cheesesalada = this.inscricaoForm.value["cheesesalada"];
 
-        somaCheesSalada = cheesesalada * 27
-
-        
-        let somaCheeseSaladafritas = 0
-        let cheeseSaladafritas = this.inscricaoForm.value["cheesesalada+fritas"];
-
-        somaCheeseSaladafritas = cheeseSaladafritas * 37
-        
+        somaCheesSalada = cheesesalada * 30
 
 
         let somaCheeseBurguer = 0
         let cheeseBurgue = this.inscricaoForm.value["cheeseburger"];
 
-        somaCheeseBurguer = cheeseBurgue * 24
-
-        let somaCheeseburguerfritas = 0
-        let cheeseburguerfritas = this.inscricaoForm.value["cheeseburguer+fritas"];
-
-        somaCheeseburguerfritas = cheeseburguerfritas * 34
+        somaCheeseBurguer = cheeseBurgue * 30
 
         let somaCocaLata = 0
         let cocalata = this.inscricaoForm.value["coca-lata"];
@@ -347,7 +335,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
         somaaguasemgas = aguasemgas * 4.5
 
-        this.valorInscricao = somaCheesSalada  + somaCheeseSaladafritas+ somaCheeseBurguer + somaCheeseburguerfritas + somaCocaLata + somaCocaZeroLata + somaGuaranaLata + somaaguacomgas + somaaguasemgas;
+        this.valorInscricao = somaCheesSalada  + somaCheeseBurguer  + somaCocaLata + somaCocaZeroLata + somaGuaranaLata + somaaguacomgas + somaaguasemgas;
         this.valorInscricaoOriginal = this.valorInscricao
       
       }
@@ -779,9 +767,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
         if (this.eventoId.toUpperCase() === '020C020E-41DC-47F6-BB18-8046B77E00A2') {
           
           this.inscricaoForm.patchValue({'cheesesalada': 0})
-          this.inscricaoForm.patchValue({'cheesesalada+fritas': 0})
           this.inscricaoForm.patchValue({'cheeseburger': 0})
-          this.inscricaoForm.patchValue({'cheeseburguer+fritas': 0})
           this.inscricaoForm.patchValue({'coca-lata': 0})
           this.inscricaoForm.patchValue({'guarana-lata': 0})
           this.inscricaoForm.patchValue({'cocazero-lata': 0})
