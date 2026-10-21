@@ -335,7 +335,12 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
         somaaguasemgas = aguasemgas * 4.5
 
-        this.valorInscricao = somaCheesSalada  + somaCheeseBurguer  + somaCocaLata + somaCocaZeroLata + somaGuaranaLata + somaaguacomgas + somaaguasemgas;
+        let somacookie = 0
+        let cookie = this.inscricaoForm.value["cookie"];
+
+        somacookie = cookie * 18
+
+        this.valorInscricao = somaCheesSalada  + somaCheeseBurguer  + somaCocaLata + somaCocaZeroLata + somaGuaranaLata + somaaguacomgas + somaaguasemgas + somacookie;
         this.valorInscricaoOriginal = this.valorInscricao
       
       }
@@ -773,6 +778,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
           this.inscricaoForm.patchValue({'cocazero-lata': 0})
           this.inscricaoForm.patchValue({'aguacomgas': 0})
           this.inscricaoForm.patchValue({'aguasemgas': 0})
+          this.inscricaoForm.patchValue({'cookie': 0})
 
         }
 
