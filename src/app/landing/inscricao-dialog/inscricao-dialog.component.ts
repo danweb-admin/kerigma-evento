@@ -406,16 +406,16 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       this.formaSelecionada = forma;
       this.inscricaoForm.patchValue({tipoPagamento: forma})
 
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026, CURADOS PARA SERVIR, FORMACAO HUMANA 2
-      if ((this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'cartao') {
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> PROFISSIONAIS SAUDE, CURADOS PARA SERVIR, FORMACAO HUMANA 2
+      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'cartao') {
         this.valorInscricao = this.valorInscricaoOriginal
 
         this.valorInscricao = this.valorInscricao *  1.04
         this.inscricaoForm.patchValue({valorInscricao: this.valorInscricao})
       }
 
-      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> EPA 2026, CURADOS PARA SERVIR, FORMACAO HUMANA 2
-      if ((this.eventoId.toUpperCase() === '26782DB5-069D-434C-BCD0-AF4514BD7E08' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'pix') {
+      // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> PROFISSIONAIS SAUDE, CURADOS PARA SERVIR, FORMACAO HUMANA 2
+      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
