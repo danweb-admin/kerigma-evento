@@ -188,12 +188,19 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
     }
     
     proximo() {
+      
+      if (this.inscricaoForm.invalid) {
+        this.inscricaoForm.markAllAsTouched();
+        return;
+      }
+
+
       let nome = this.inscricaoForm.get('nome')?.value
       
       let nomeValidado = nome.split(' ');
 
       if (nomeValidado.length < 2){
-        this.toastr.error('Informe o nome complento!');
+        this.toastr.error('Informe o nome completo!');
         return
 
       }
