@@ -414,7 +414,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       this.inscricaoForm.patchValue({tipoPagamento: forma})
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> PROFISSIONAIS SAUDE, CURADOS PARA SERVIR, FORMACAO HUMANA 2
-      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'cartao') {
+      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F'  || this.eventoId.toUpperCase() === '37283D36-E382-47A2-86C8-44EB10A4618F') && forma === 'cartao') {
         this.valorInscricao = this.valorInscricaoOriginal
 
         this.valorInscricao = this.valorInscricao *  1.04
@@ -422,7 +422,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> PROFISSIONAIS SAUDE, CURADOS PARA SERVIR, FORMACAO HUMANA 2
-      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F') && forma === 'pix') {
+      if ((this.eventoId.toUpperCase() === '9B9C9C13-120E-41A7-B2E6-03047685FF3D' || this.eventoId.toUpperCase() === '4B18B4A6-3A7D-4834-A489-FCE89CEDFACB' || this.eventoId.toUpperCase() === '4118FDE3-56F0-4E42-985B-7C4D5FC3270F' || this.eventoId.toUpperCase() === '37283D36-E382-47A2-86C8-44EB10A4618F') && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
