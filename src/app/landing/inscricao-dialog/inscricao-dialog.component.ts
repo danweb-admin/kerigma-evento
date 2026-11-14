@@ -451,7 +451,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
 
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
-      if (this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' && forma === 'cartao') {
+      if ((this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' || this.eventoId.toUpperCase() === '7C00F819-5939-4CFC-B107-29914A8035EB') && forma === 'cartao') {
         this.valorInscricaoOriginal = this.valorInscricao
 
         this.valorInscricao = this.valorInscricao *  1.04
@@ -459,7 +459,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> RCC RS
-      if (this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' && forma === 'pix') {
+      if ((this.eventoId.toUpperCase() === 'EC0F5285-81C7-4996-AEE4-3D31C9FE5E10' || this.eventoId.toUpperCase() === '7C00F819-5939-4CFC-B107-29914A8035EB') && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
