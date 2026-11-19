@@ -43,7 +43,7 @@ export class EventoLandingComponent implements OnInit {
       
     });
 
-    if (slug?.match('alimentacao')){
+    if (slug?.match('camiseta-v-deserto')){
       this.alimentacao = true;
     }
     

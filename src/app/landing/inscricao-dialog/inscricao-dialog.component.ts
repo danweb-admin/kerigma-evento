@@ -432,7 +432,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
-      if (this.eventoId.toUpperCase() === '17E88C8A-A1DB-4B39-B6DF-40D91813424C'  && forma === 'cartao') {
+      if ((this.eventoId.toUpperCase() === '17E88C8A-A1DB-4B39-B6DF-40D91813424C'  || this.eventoId.toUpperCase() === 'A8E8024A-BEC4-469F-8EE6-86BE9081D289') && forma === 'cartao') {
         this.valorInscricao = this.valorInscricaoOriginal
 
         this.valorInscricao = this.valorInscricao *  1.06
@@ -440,7 +440,7 @@ export class InscricaoDialogComponent implements OnInit, AfterViewInit{
       }
 
       // ESSA CONFIGURACAO É ESPECIFICA PARA O EVENTO -> NOITE DE LOUVOR
-      if (this.eventoId.toUpperCase() === '17E88C8A-A1DB-4B39-B6DF-40D91813424C'  && forma === 'pix') {
+      if ((this.eventoId.toUpperCase() === '17E88C8A-A1DB-4B39-B6DF-40D91813424C' || this.eventoId.toUpperCase() === 'A8E8024A-BEC4-469F-8EE6-86BE9081D289')  && forma === 'pix') {
         if (this.valorInscricaoOriginal === undefined){
           this.valorInscricaoOriginal = this.valorInscricao
         }
